@@ -6,8 +6,6 @@
 #' `iterations` is the number of iterations to run brms. 
 #' `priors ` is the priors for the brms to use.
 
-rm(list=ls())
-
 library(brms) 
 library(cmdstanr)
 library(ggplot2)
@@ -17,12 +15,14 @@ library(tidyverse)
 library(ggpubr)
 
 
-TRC_PARMS <- function( data.frame, iterations, priors){
+TRC_PARMS <- function( data.frame, iterations, priors, idx){
   
-  equation <- nee ~ a * exp(b*TA)
+  data.frame <- data.frame %>% mutate(idx= idx)
+  
+  try(equation <- nee ~ a * exp(b*TA) , silent =T)
   
   # PARM Dataframe:
-  parms <- data.frame(idx=as.character(), 
+  try(parms <- data.frame(idx=as.character(), 
                       a.mean = as.numeric(), 
                       a.se = as.numeric(),
                       a.Bulk_ESS= as.numeric() ,
@@ -33,30 +33,34 @@ TRC_PARMS <- function( data.frame, iterations, priors){
                       b.se = as.numeric(),
                       b.Bulk_ESS= as.numeric() ,
                       b.Tail_ESS= as.numeric() ,
-                      b.Rhat= as.numeric())
+                      b.Rhat= as.numeric(),
+                      samples= as.numeric()), silent = T)
   
-  for ( i in unique(data.frame$idx)){
+  for ( i in unique(idx)){
     print(i)
     
     # Subset the file:
-    df <- data.frame %>% filter(idx == i)
+    try( df <- data.frame %>% filter(idx == i), silent= T)
     # get priors:
     
     # priors <- get_prior(bf(equation, a1+ax+r ~ 1, nl=TRUE),
     #                    data = df %>% filter(PAR > 0),
     #                    family = poisson())
-    model.brms <-  brm( bf(nee ~ a * exp(b*TA),a+b ~ 1, nl=TRUE),
+    try(model.brms <-  brm( bf(nee ~ a * exp(b*TA),a+b ~ 1, nl=TRUE),
                         prior = priors , data = data.frame, 
-                        backend = "cmdstanr", iter = iterations, cores =4, seed=101)
+                        backend = "cmdstanr", iter = iterations, cores =4, seed=101), silent= T)
     
     
-    model.brms.df <- summary(model.brms)$fixed 
+    try(model.brms.df <- summary(model.brms)$fixed , silent= T)
     
-    model.brms.df.a <- model.brms.df %>% filter( row.names(model.brms.df) == 'a_Intercept')
-    model.brms.df.b <- model.brms.df %>% filter( row.names(model.brms.df) == 'b_Intercept')
+    try(model.brms.df.a <- model.brms.df %>% filter( row.names(model.brms.df) == 'a_Intercept'), silent= T)
+    try(model.brms.df.b <- model.brms.df %>% filter( row.names(model.brms.df) == 'b_Intercept'), silent= T)
+    
+    try(samples <- data.frame %>% filter(YearMon == i)%>% select(nee)  %>% na.omit %>% nrow , silent= T)
+    try(baseline <- as.Date(paste(i, '-01', sep="")) %>% lubridate::days_in_month() *48 %>% as.numeric, silent= T)
     
     
-    results <- data.frame( idx = i, 
+    try(results <- data.frame( idx = i, 
                            a.mean = model.brms.df.a$Estimate ,
                            a.se = model.brms.df.a$Est.Error ,
                            a.Bulk_ESS = model.brms.df.a$Bulk_ESS , 
@@ -67,8 +71,9 @@ TRC_PARMS <- function( data.frame, iterations, priors){
                            b.se = model.brms.df.b$Est.Error ,
                            b.Bulk_ESS = model.brms.df.b$Bulk_ESS , 
                            b.Tail_ESS = model.brms.df.b$Tail_ESS ,
-                           b.Rhat = model.brms.df.b$Rhat)
-    parms <- parms %>% rbind(results)
+                           b.Rhat = model.brms.df.b$Rhat,
+                           samples= samples/baseline *100 ), silent= T)
+    try( parms <- parms %>% rbind(results), silent= T)
   }
   
   return(parms ) 

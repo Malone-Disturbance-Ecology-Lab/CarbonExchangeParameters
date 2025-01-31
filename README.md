@@ -2,7 +2,7 @@
 
 Flux partitioning methods use a light response curve (LRC). We can use daytime NEE (NEEday) from tower sites to fit LRCs and nighttime NEE (NEEnight) to estimate ecosystem respiration with temperature response curves (TRC). Using daytime data,  fit LRCs:
 
-NEE ~ (a1 * PAR * ax)/(a1 * PAR + ax) + r									
+NEE ~ (a1 * PAR * ax)/(a1 * PAR + ax) - r									
                 
 Where r is respiration (𝜇mol CO2 m-2 s-1), a1 is the apparent quantum efficiency of CO2 uptake (Reichstein et al., 2012)), PAR is solar radiation (𝜇mol m-2 s-1). ax is the maximum CO2 uptake rate on the ecosystem scale (𝜇mol CO2 m-2 s-1) (Reichstein et al., 2012). The r is the sum of all the respiratory fluxes in the tower footprint during the sampling period, including respiration from primary producers and microbial communities (Chapin et al., 2006). 
 
