@@ -6,7 +6,8 @@ library(ggplot2)
 library(beepr)
 library(tidybayes)
 
-source('/Users/sm3466/YSE Dropbox/Sparkle Malone/Research/Hurricane_Recovery_Debt/05_Flow_SRS6Fix.R' )
+source("/Users/sm3466/YSE Dropbox/Sparkle Malone/Research/CarbonExchangeParameters/SampleData/05_Flow_SRS6Fix.R" )
+
 srs6 <- srs6.sites %>% mutate(PAR= SW_IN, nee=NEE, YearMon = format( TIMESTAMP, format="%Y-%m")) 
 
 parms <- data.frame(idx=as.character(), 
@@ -71,7 +72,7 @@ results <- data.frame( idx = '2004-12',
 parms <- parms %>% rbind(results)
 # needs nee and PAR
 
-source('/Users/sm3466/YSE Dropbox/Sparkle Malone/Research/CarbonExchangeParameters/LRC_PARMS.R' )
+source('LRC_PARMS.R' )
 
 test.LRC.parms <- LRC_PARMS(data.frame=srs6 , 
                             idx=srs6$YearMon, 
@@ -87,7 +88,7 @@ test.LRC.parms <-read.csv('SRS6-Yearmon-LRC-Parms.csv')
 
 priors.trc <- prior(normal( 0.5 ,  0.03), nlpar = "b", lb=0.001, ub= 0.09)
 
-source('/Users/sm3466/YSE Dropbox/Sparkle Malone/Research/CarbonExchangeParameters/TRC_PARMS.R' )
+source('TRC_PARMS.R' )
 
 test.TRC.parms <- TRC_PARMS(data.frame=srs6 , 
                             idx=srs6$YearMon, 
