@@ -47,7 +47,7 @@ model.brms.df.ax <- model.brms.df %>% filter( row.names(model.brms.df) == 'ax_In
 model.brms.df.r <- model.brms.df %>% filter( row.names(model.brms.df) == 'r_Intercept')
 
 samples <- srs6 %>% filter(YearMon == '2004-12')%>% select(nee)  %>% na.omit %>% nrow
-baseline <- as.Date(paste(i, '-01', sep="")) %>% lubridate::days_in_month() *48 %>% as.numeric
+baseline <- as.Date(paste('2004-12', '-01', sep="")) %>% lubridate::days_in_month()*48 %>% as.numeric
 
 results <- data.frame( idx = '2004-12', 
                        a1.mean = model.brms.df.a1$Estimate ,
