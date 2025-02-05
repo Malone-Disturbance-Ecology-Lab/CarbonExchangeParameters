@@ -6,7 +6,8 @@ library(ggplot2)
 library(beepr)
 library(tidybayes)
 
-source('/Volumes/MaloneLab/Research/ENP/Everglades_MODIS_LAI_TS/03_SRS6Fix.R' )
+source('/Users/sm3466/YSE Dropbox/Sparkle Malone/Research/Hurricane_Recovery_Debt/05_Flow_SRS6Fix.R' )
+srs6 <- srs6.sites %>% mutate(PAR= SW_IN, nee=NEE, YearMon = format( TIMESTAMP, format="%Y-%m")) 
 
 parms <- data.frame(idx=as.character(), 
                     a1.mean = as.numeric(), 
@@ -27,10 +28,6 @@ parms <- data.frame(idx=as.character(),
                     r.Tail_ESS= as.numeric() ,
                     r.Rhat= as.numeric(),
                     samples= as.numeric())
-
-
-srs6 <- srs6.sites %>% mutate(PAR= SW_IN, nee=NEE, YearMon = format( TIMESTAMP, format="%Y-%m")) 
-
 
 priors <-  prior(normal(-0.01, 0.1), nlpar = "a1", lb=-0.2, ub= 0) +
   prior(normal( -7.65 ,  0.33), nlpar = "ax", lb=-30, ub= -5) +
@@ -74,17 +71,31 @@ results <- data.frame( idx = '2004-12',
 parms <- parms %>% rbind(results)
 # needs nee and PAR
 
-test.LRC.parms <- LRC_PARMS(data.frame=srs6 , idx=srs6$YearMon, priors = priors, iterations = 4000)
+source('/Users/sm3466/YSE Dropbox/Sparkle Malone/Research/CarbonExchangeParameters/LRC_PARMS.R' )
+
+test.LRC.parms <- LRC_PARMS(data.frame=srs6 , 
+                            idx=srs6$YearMon, 
+                            priors = priors.lrc, 
+                            iterations = 4000,
+                            nee='nee', 
+                            PAR='PAR')
 
 write.csv(test.LRC.parms , 'SRS6-Yearmon-LRC-Parms.csv' )
 
 test.LRC.parms <-read.csv('SRS6-Yearmon-LRC-Parms.csv')
 
 
+priors.trc <- prior(normal( 0.5 ,  0.03), nlpar = "b", lb=0.001, ub= 0.09)
 
-priors <- prior(normal( 0.5 ,  0.03), nlpar = "b", lb=0.001, ub= 0.09)
+source('/Users/sm3466/YSE Dropbox/Sparkle Malone/Research/CarbonExchangeParameters/TRC_PARMS.R' )
 
-test.TRC.parms <- TRC_PARMS(data.frame=srs6 , idx=srs6$YearMon, priors = priors, iterations = 4000)
+test.TRC.parms <- TRC_PARMS(data.frame=srs6 , 
+                            idx=srs6$YearMon, 
+                            priors = priors.trc, 
+                            iterations = 4000,
+                            nee='nee', 
+                            PAR='PAR',
+                            TA = 'TA')
 
 write.csv(test.TRC.parms , 'SRS6-Yearmon-TRC-Parms.csv' )
 

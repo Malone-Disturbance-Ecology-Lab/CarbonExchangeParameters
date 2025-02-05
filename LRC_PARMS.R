@@ -4,12 +4,14 @@
 #' `LRC_PARMS` requires a few arguments @data.frame,  @iterations, and @priors.
 #' `dataframe` is a dataframe that containes nee, an index, and PAR.
 #' `iterations` is the number of iterations to run brms. 
-#' `priors ` is the priors for the brms to use.
+#' `priors.LRC ` is the priors for the brms to use.
+#' `idx` is the column containing the index.
+#' `nee` is the name of the column containing NEE.
+#' `PAR` is the name of the column containing PAR.
+#' `TA` is the name of the column containing air temperature.
 
 
 # Add notes to indicate successful or unsuccessful fit. 
-
-
 
 rm(list=ls())
 
@@ -21,11 +23,32 @@ library(tidybayes)
 library(tidyverse)
 library(ggpubr)
 
-LRC_PARMS <- function( data.frame, iterations, priors, idx){
+
+# Example of priors: 
+priors.lrc <-  prior(normal(-0.01, 0.1), nlpar = "a1", lb=-0.2, ub= 0) +
+  prior(normal( -7.65 ,  0.33), nlpar = "ax", lb=-30, ub= -0.01) +
+  prior(normal(2.10, 0.11), nlpar = "r", lb=1.9, ub= 2.2)
+
+LRC_PARMS <- function( data.frame, iterations, priors.lrc, idx, nee, PAR){
   
-  data.frame <- data.frame %>% mutate(idx= idx)
+  df <- data.frame %>% mutate(idx= idx,
+                                      nee= nee,
+                                      PAR= PAR ) %>% select(idx, nee, PAR)
   
   equation <- nee ~ (a1 * PAR * ax)/(a1 * PAR + ax) - r
+  
+  
+  if( c("idx") %in% names(df) ) {
+    print("idx present")
+  } else{ print("The dataframe must include: idx,  nee, and PAR")}
+  
+  if( c("nee") %in% names(df) ) {
+    print("nee data present")
+  }  else{ print("The dataframe must include: idx,  nee, and PAR")}
+  
+  if( c("PAR") %in% names(df) ) {
+    print("PAR data present")
+  } else{ print("The dataframe must include: idx,  nee, and PAR")}
 
 # PARM Dataframe:
 parms <- data.frame(idx=as.character(), 
@@ -48,27 +71,29 @@ parms <- data.frame(idx=as.character(),
                     r.Rhat= as.numeric(),
                     samples= as.numeric())
 
-for ( i in unique(idx)){
+
+
+for ( i in unique(df$idx)){
   print(i)
    
   # Subset the file:
-  df <- data.frame %>% filter(idx == i,
-                              PAR > 0) %>% na.omit
+  df.sub <- df %>% filter(idx == i, PAR > 0) %>% na.omit
 
   # get priors:
- 
    #priors <- get_prior(bf(equation, a1+ax+r ~ 1, nl=TRUE),data = df %>% filter(PAR > 0), family = poisson())
   
   try(model.brms <- brm( bf( equation, a1+ax+r ~ 1, nl=TRUE),
-                 prior = priors , data = df, iter = iterations, cores =3, chains = 1, backend = "cmdstanr"), silent= T)
+                 prior = priors.lrc , data = df, iter = iterations, cores =3, chains = 1, backend = "cmdstanr"), silent= F)
+ 
+   print(model.brms)
   
   try(model.brms.df <- summary(model.brms)$fixed , silent = T)
-  
-  try(model.brms.df.a1 <- model.brms.df %>% filter( row.names(model.brms.df) == 'a1_Intercept'), silent = T)
-  try( model.brms.df.ax <- model.brms.df %>% filter( row.names(model.brms.df) == 'ax_Intercept'), silent = T)
-  try(model.brms.df.r <- model.brms.df %>% filter( row.names(model.brms.df) == 'r_Intercept'), silent = T)
+  try(model.brms.df.a1 <- model.brms.df %>% filter( row.names(model.brms.df) == 'a1_Intercept'), silent = F)
+  try( model.brms.df.ax <- model.brms.df %>% filter( row.names(model.brms.df) == 'ax_Intercept'), silent = F)
+  try(model.brms.df.r <- model.brms.df %>% filter( row.names(model.brms.df) == 'r_Intercept'), silent = F)
   
   samples <- data.frame %>% filter(YearMon == i)%>% select(nee)  %>% na.omit %>% nrow
+  
   baseline <- as.Date(paste(i, '-01', sep="")) %>% lubridate::days_in_month() *48 %>% as.numeric
   
   
@@ -91,17 +116,14 @@ for ( i in unique(idx)){
                          r.Tail_ESS = model.brms.df.r$Tail_ESS ,
                          r.Rhat = model.brms.df.r$Rhat,
                          samples= samples/baseline *100 ), silent = T)
+  
+ print(results)
+ 
   try(parms <- parms %>% rbind(results), silent = T)
 }
  
 return(parms ) 
 }
-
-# Example of priors: 
-
-priors <-  prior(normal(-0.01, 0.1), nlpar = "a1", lb=-0.2, ub= 0) +
-prior(normal( -7.65 ,  0.33), nlpar = "ax", lb=-30, ub= -0.01) +
-  prior(normal(2.10, 0.11), nlpar = "r", lb=1.9, ub= 2.2)
 
 # EOF
 

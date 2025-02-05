@@ -2,9 +2,13 @@
 #'
 #' `TRC_PARMS` returns a dataframe of parameter values by the index used to fit them.
 #' `TRC_PARMS` requires a few arguments @data.frame,  @iterations, and @priors.
-#' `dataframe` is a dataframe that containes nee, an index, and TA.
+#' `dataframe` is a dataframe that containes nee, idx, TA, and PAR.
 #' `iterations` is the number of iterations to run brms. 
-#' `priors ` is the priors for the brms to use.
+#' `priors.trc ` is the priors for the brms to use.
+#' `idx` is the column containing the index.
+#' `nee` is the name of the column containing NEE.
+#' `PAR` is the name of the column containing PAR.
+#' `TA` is the name of the column containing air temperature.
 
 library(brms) 
 library(cmdstanr)
@@ -14,10 +18,30 @@ library(tidybayes)
 library(tidyverse)
 library(ggpubr)
 
+# Example of priors: 
+priors.trc <- prior(normal( 0.5 ,  0.03), nlpar = "b", lb=0.001, ub= 0.09)
 
-TRC_PARMS <- function( data.frame, iterations, priors, idx){
+TRC_PARMS <- function( data.frame, iterations, priors.trc, idx, nee, PAR, TA){
   
-  data.frame <- data.frame %>% mutate(idx= idx)
+  df <- data.frame %>% mutate(idx= idx,
+                              nee= nee,
+                              PAR= PAR,
+                              TA = TA) %>% select(idx, nee, PAR, TA)
+  
+  if( c("idx") %in% names(df) ) {
+    print("idx present")
+  } else{ print("The dataframe must include: idx,  nee, TA, and PAR")}
+  
+  if( c("nee") %in% names(df) ) {
+    print("nee data present")
+  }  else{ print("The dataframe must include: idx,  nee, TA, and PAR")}
+  
+  if( c("PAR") %in% names(df) ) {
+    print("PAR data present")
+  } else{ print("The dataframe must include: idx,  nee, TA, and PAR")}
+  if( c("TA") %in% names(df) ) {
+    print("PAR data present")
+  } else{ print("The dataframe must include: idx,  nee, TA, and PAR")}
   
   try(equation <- nee ~ a * exp(b*TA) , silent =T)
   
@@ -36,28 +60,29 @@ TRC_PARMS <- function( data.frame, iterations, priors, idx){
                       b.Rhat= as.numeric(),
                       samples= as.numeric()), silent = T)
   
-  for ( i in unique(idx)){
+  for ( i in unique(df$idx)){
     print(i)
     
     # Subset the file:
-    try( df <- data.frame %>% filter(idx == i), silent= T)
+    try( df.sub <- df %>% filter(idx == i, PAR < 10), silent= T)
     # get priors:
     
     # priors <- get_prior(bf(equation, a1+ax+r ~ 1, nl=TRUE),
     #                    data = df %>% filter(PAR > 0),
     #                    family = poisson())
     try(model.brms <-  brm( bf(nee ~ a * exp(b*TA),a+b ~ 1, nl=TRUE),
-                        prior = priors , data = data.frame, 
-                        backend = "cmdstanr", iter = iterations, cores =4, seed=101), silent= T)
+                        prior = priors.trc , data = df.sub, 
+                        backend = "cmdstanr", iter = iterations, cores =4, seed=101), silent= F)
     
+    print(model.brms)
     
-    try(model.brms.df <- summary(model.brms)$fixed , silent= T)
+    try(model.brms.df <- summary(model.brms)$fixed , silent= F)
     
-    try(model.brms.df.a <- model.brms.df %>% filter( row.names(model.brms.df) == 'a_Intercept'), silent= T)
-    try(model.brms.df.b <- model.brms.df %>% filter( row.names(model.brms.df) == 'b_Intercept'), silent= T)
+    try(model.brms.df.a <- model.brms.df %>% filter( row.names(model.brms.df) == 'a_Intercept'), silent= F)
+    try(model.brms.df.b <- model.brms.df %>% filter( row.names(model.brms.df) == 'b_Intercept'), silent= F)
     
-    try(samples <- data.frame %>% filter(YearMon == i)%>% select(nee)  %>% na.omit %>% nrow , silent= T)
-    try(baseline <- as.Date(paste(i, '-01', sep="")) %>% lubridate::days_in_month() *48 %>% as.numeric, silent= T)
+    try(samples <- data.frame %>% filter(YearMon == i)%>% select(nee)  %>% na.omit %>% nrow , silent= F)
+    try(baseline <- as.Date(paste(i, '-01', sep="")) %>% lubridate::days_in_month() *48 %>% as.numeric, silent= F)
     
     
     try(results <- data.frame( idx = i, 
@@ -73,12 +98,13 @@ TRC_PARMS <- function( data.frame, iterations, priors, idx){
                            b.Tail_ESS = model.brms.df.b$Tail_ESS ,
                            b.Rhat = model.brms.df.b$Rhat,
                            samples= samples/baseline *100 ), silent= T)
+    
+    print( results) 
     try( parms <- parms %>% rbind(results), silent= T)
+    
   }
-  
+   
   return(parms ) 
 }
 
-# Example of priors: 
-
-priors <- prior(normal( 0.5 ,  0.03), nlpar = "b", lb=0.001, ub= 0.09)
+#EOF
