@@ -25,10 +25,10 @@ library(ggpubr)
 
 
 # Example of priors: 
-priors.lrc <-  prior(normal(-0.01, 0.1), nlpar = "a1", lb=-0.2, ub= 0) +
+priors <-  prior(normal(-0.01, 0.1), nlpar = "a1", lb=-0.2, ub= 0) +
   prior(normal( -7.65 ,  0.33), nlpar = "ax", lb=-30, ub= -5) +
   prior(normal(2.10, 0.11), nlpar = "r", lb=1.9, ub= 2.2)+
-  prior(normal(.3, .2), nlpar = "theta", lb=0, ub= 1)
+  prior(normal(1.9, .1), nlpar = "theta", lb=0, ub= 3)
 
 LRC_PARMS <- function( data.frame, iterations, priors.lrc, idx, nee, PAR){
   

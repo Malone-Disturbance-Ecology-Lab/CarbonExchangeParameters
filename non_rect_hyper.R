@@ -40,7 +40,7 @@ parms <- data.frame(idx=as.character(),
 priors <-  prior(normal(-0.01, 0.1), nlpar = "a1", lb=-0.2, ub= 0) +
   prior(normal( -7.65 ,  0.33), nlpar = "ax", lb=-30, ub= -5) +
   prior(normal(2.10, 0.11), nlpar = "r", lb=1.9, ub= 2.2)+
-  prior(normal(.3, .2), nlpar = "theta", lb=0, ub= 1)
+  prior(normal(1.9, .1), nlpar = "theta", lb=0, ub= 3)
 
 
 equation <- nee ~ ((a1 * PAR) + ax - sqrt((a1 * PAR + ax)^2 - 4 * (a1 * PAR * theta * ax))/(2 * theta))-r
@@ -89,6 +89,14 @@ results <- data.frame( idx = '2004-12',
 
 parms <- parms %>% rbind(results)
 # needs nee and PAR
+
+
+
+
+
+
+
+
 
 source('LRC_PARMS_NRH.R')
 
