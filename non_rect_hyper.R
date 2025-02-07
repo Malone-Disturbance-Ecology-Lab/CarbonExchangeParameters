@@ -6,6 +6,7 @@ library(ggplot2)
 library(beepr)
 library(tidybayes)
 
+#this is an edit
 source("/Users/sm3466/YSE Dropbox/Sparkle Malone/Research/CarbonExchangeParameters/SampleData/05_Flow_SRS6Fix.R" )
 
 srs6 <- srs6.sites %>% mutate(PAR= SW_IN, nee=NEE, YearMon = format( TIMESTAMP, format="%Y-%m")) 
