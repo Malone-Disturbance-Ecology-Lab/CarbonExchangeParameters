@@ -11,3 +11,5 @@ Temperature response curves are a modified Arrhenius equation (Logan, 1982; Falg
 NEE ~ a * exp(b*TA)                                   
 
 Where night time NEE is ecosystem respiration (𝜇mol CO2 m-2 s-1), a is the base respiration rate at 0 ℃ (𝜇mol CO2 m-2 s-1), b reveals the sensitivity of NEE to air temperature (TA, ℃). Model parameters are fit using the R package brms (Bürkner, 2017; Padfield et al., 2020). This method allows for prior information on parameter values and uncertainty estimation around predictions and parameters (Bürkner, 2017). Running ~5,000 iterations and four chains with informative priors, we can assess model convergence using posterior predictive checks and Rhat (Bürkner, 2017). 
+
+<iframe src="https://docs.google.com/spreadsheets/d/1kfMe3CtMjuceIHEMsne8wnPSclAk2_ak4Mmb0SM_hew/edit?gid=0#gid=0" width="600" height="400"></iframe>
