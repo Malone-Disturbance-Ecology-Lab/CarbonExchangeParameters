@@ -1,14 +1,14 @@
 #' fit a Temperature Response Curves (TRC) by an index to get a parameter file
 #'
 #' `TRC_PARMS` returns a dataframe of parameter values by the index used to fit them.
-#' `TRC_PARMS` requires a few arguments @data.frame,  @iterations, and @priors.
-#' `dataframe` is a dataframe that containes nee, idx, TA, and PAR.
+#' `TRC_PARMS` requires a few arguments @data.frame,  @iterations, @priors, @idx.colname, @NEE.colname, @PAR.colname, and @TA.colname.
+#' `dataframe` is a dataframe that containes NEE, idx, TA, and PAR.
 #' `iterations` is the number of iterations to run brms. 
 #' `priors.trc ` is the priors for the brms to use.
-#' `idx` is the column containing the index.
-#' `nee` is the name of the column containing NEE.
-#' `PAR` is the name of the column containing PAR.
-#' `TA` is the name of the column containing air temperature.
+#' `idx.colname` is the column containing the index.
+#' `NEE.colname` is the name of the column containing NEE.
+#' `PAR.colname` is the name of the column containing PAR.
+#' `TA.colname` is the name of the column containing air temperature.
 
 library(brms) 
 library(cmdstanr)
@@ -18,31 +18,50 @@ library(tidybayes)
 library(tidyverse)
 library(ggpubr)
 
+message("Using the LRC_PARMS function requires the following libraries: brms, 
+        cmdstanr, ggplot2, beepr, tidybayes, tidyverse, and ggpubr.")
+
+message("This function uses the equation:
+        
+        nee ~ ((a1 * PAR * ax)/(α * PAR + ax)) - r
+        
+        Where r is ecosystem respiration (𝜇mol CO2 m-2 s-1), 
+        a1 is the apparent quantum efficiency of CO2 uptake (CO2),
+        and ax is the maximum CO2 uptake rate on the ecosystem scale.
+        
+        The equations require PAR (𝜇mol m-2 s-1) and NEE (𝜇mol m-2 s-1)")
+
+
+
 # Example of priors: 
 priors.trc <- prior(normal( 0.5 ,  0.03), nlpar = "b", lb=0.001, ub= 0.09)
 
-TRC_PARMS <- function( data.frame, iterations, priors.trc, idx, nee, PAR, TA){
+message("To see the default priors run: 'priors.trc' ")
+
+TRC_PARMS <- function( data.frame, iterations, priors.trc, idx.colname, NEE.colname, PAR.colname, TA.colname){
   
-  df <- data.frame %>% mutate(idx= idx,
-                              nee= nee,
-                              PAR= PAR,
-                              TA = TA) %>% select(idx, nee, PAR, TA)
+  data.frame$nee <- data.frame[,NEE.colname]
+  data.frame$idx <- data.frame[,idx.colname]
+  data.frame$PAR <- data.frame[,PAR.colname]
+  data.frame$TA <- data.frame[,TA.colname]
+  
+  df <- data.frame %>% select(idx, nee, PAR, TA)
   
   if( c("idx") %in% names(df) ) {
-    print("idx present")
+    print("GREAT JOB! your dataframe contains idx")
   } else{ print("The dataframe must include: idx,  nee, TA, and PAR")}
   
   if( c("nee") %in% names(df) ) {
-    print("nee data present")
+    print("YIPEE! your dataframe contains nee")
   }  else{ print("The dataframe must include: idx,  nee, TA, and PAR")}
   
   if( c("PAR") %in% names(df) ) {
-    print("PAR data present")
-  } else{ print("The dataframe must include: idx,  nee, TA, and PAR")}
-  if( c("TA") %in% names(df) ) {
-    print("PAR data present")
+    print("Hooray! your dataframe contains PAR")
   } else{ print("The dataframe must include: idx,  nee, TA, and PAR")}
   
+  if( c("TA") %in% names(df) ) {
+    print("Hooray! your dataframe contains TA")
+  } else{ print("The dataframe must include: idx,  nee, TA, and PAR")}
   try(equation <- nee ~ a * exp(b*TA) , silent =T)
   
   # PARM Dataframe:
@@ -59,6 +78,8 @@ TRC_PARMS <- function( data.frame, iterations, priors.trc, idx, nee, PAR, TA){
                       b.Tail_ESS= as.numeric() ,
                       b.Rhat= as.numeric(),
                       samples= as.numeric()), silent = T)
+  
+  message(" Your dataframe looks good and you are now ready to start fitting models")
   
   for ( i in unique(df$idx)){
     print(i)
@@ -99,6 +120,7 @@ TRC_PARMS <- function( data.frame, iterations, priors.trc, idx, nee, PAR, TA){
                            b.Rhat = model.brms.df.b$Rhat,
                            samples= samples/baseline *100 ), silent= T)
     
+    message( 'YOUR DID IT!')
     print( results) 
     try( parms <- parms %>% rbind(results), silent= T)
     
@@ -106,5 +128,30 @@ TRC_PARMS <- function( data.frame, iterations, priors.trc, idx, nee, PAR, TA){
    
   return(parms ) 
 }
+
+message("Model parameters Are fit using the R package brms.
+        
+        Rhat (Potential Scale Reduction Factor):
+        
+        Indicates how well the different Markov chains in your analysis 
+        have converged to the same posterior distribution. 
+        
+        Ideally, Rhat should be close to 1 for all parameters.
+        
+        A high Rhat value suggests potential convergence issues and 
+        the need to run the chains longer. 
+        
+        Bulk ESS (Effective Sample Size - Bulk):
+        
+        Estimates the effective number of independent samples from the 
+        central part of the posterior distribution. 
+        
+        Tail ESS (Effective Sample Size - Tail):
+        Estimates the effective number of independent samples from the tails of the posterior distribution. 
+        
+        Important for assessing the reliability of quantile estimates (e.g., 95% confidence intervals). 
+        
+        Key points to remember:
+        Aim for Rhat close to 1 and high values for both Bulk ESS and Tail ESS." )
 
 #EOF
