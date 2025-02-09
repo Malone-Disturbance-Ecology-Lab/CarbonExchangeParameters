@@ -12,7 +12,7 @@ NEE ~ a * exp(b*TA)
 
 Where night time NEE is ecosystem respiration (𝜇mol CO2 m-2 s-1), a is the base respiration rate at 0 ℃ (𝜇mol CO2 m-2 s-1), b reveals the sensitivity of NEE to air temperature (TA, ℃). Model parameters are fit using the R package brms (Bürkner, 2017; Padfield et al., 2020). This method allows for prior information on parameter values and uncertainty estimation around predictions and parameters (Bürkner, 2017). Running ~5,000 iterations and four chains with informative priors, we can assess model convergence using posterior predictive checks and Rhat (Bürkner, 2017). 
 
-|Function_Name	|Equation ----------------------------------|
+|Function_Name	|Equation |
 |---------------|-------------------------------------------|
 |LRC_PARMS_01	  |NEE =  (a1 * PAR * ax)/(a1 * PAR + ax) - r |
 |LRC_PARMS_01	  |NEE = (a*PAR*Pmax))/(a*PAR+Pmax)-Rd        |
