@@ -1,6 +1,5 @@
 # Example Workflow:
 
-rm(list=ls())
 
 library(tidyverse)
 
@@ -24,17 +23,22 @@ write.csv(test.LRC.parms , 'SRS6-Yearmon-LRC-Parms.csv' )
 test.LRC.parms <-read.csv('SRS6-Yearmon-LRC-Parms.csv')
 
 
-priors.trc <- prior(normal( 0.5 ,  0.03), nlpar = "b", lb=0.001, ub= 0.09)
+# Example of priors: 
+priors.trc <- prior(normal( 0.5 ,  0.3), nlpar = "Ea", lb=0.01, ub= 1)+
+  prior(normal( 0.5 ,  0.3), nlpar = "Rref", lb=0.01, ub= 1)
 
-source('TRC_PARMS.R' )
+source('TRC_PARMS_06.R' )
 
-test.TRC.parms <- TRC_PARMS(data.frame=srs6.sub , 
+
+
+test.TRC.parms <- TRC_PARMS_06(data.frame=srs6.sub , 
                             idx.colname='YearMon', 
                             priors = priors.trc, 
                             iterations = 4000,
-                            NEE.colname='NEE', 
-                            PAR.colname='PAR',
-                            TA.colname = 'TA')
+                            Reco.colname='Reco', 
+                            TA.colname = 'TA',
+                            PAR.colname = 'PAR')
+
 
 write.csv(test.TRC.parms , 'SRS6-Yearmon-TRC-Parms.csv' )
 
