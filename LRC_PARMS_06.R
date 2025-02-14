@@ -27,7 +27,7 @@ priors.lrc <-  prior(normal(-5, 5), nlpar = "Pm", lb=-30, ub= 0) +
   prior(normal(0.1, 1), nlpar = "alpha", lb=0, ub= 1) +
   prior(normal(100, 100), nlpar = "Icomp", lb=0, ub= 500)
 
-LRC_PARMS_Junna <- function( data.frame, iterations, priors.lrc, idx, nee, PAR){
+LRC_PARMS_06 <- function( data.frame, iterations, priors.lrc, idx, nee, PAR){
   
   df <- data.frame %>% mutate(idx= idx,
                               nee= nee,
