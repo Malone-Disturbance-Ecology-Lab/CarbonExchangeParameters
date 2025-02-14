@@ -18,67 +18,65 @@ library(tidybayes)
 library(tidyverse)
 library(ggpubr)
 
-message("Using the LRC_PARMS function requires the following libraries: brms, 
+message("Using the TRC_PARMS function requires the following libraries: brms, 
         cmdstanr, ggplot2, beepr, tidybayes, tidyverse, and ggpubr.")
 
 message("This function uses the equation:
         
-        nee ~ ((a1 * PAR * ax)/(α * PAR + ax)) - r
+        Reco ~ Rref * exp((Ea/R)*((1/Tref)-(1/TA)))
         
-        Where r is ecosystem respiration (𝜇mol CO2 m-2 s-1), 
-        a1 is the apparent quantum efficiency of CO2 uptake (CO2),
-        and ax is the maximum CO2 uptake rate on the ecosystem scale.
-        
-        The equations require PAR (𝜇mol m-2 s-1) and NEE (𝜇mol m-2 s-1)")
+        TA must be in kelvin")
 
 
 
 # Example of priors: 
-priors.trc <- prior(prior(default(), nlpar = "Rref") + 
-                    prior(default(), nlpar = "E0"))
+priors.trc <- prior(normal( 0.5 ,  0.3), nlpar = "Ea", lb=0.01, ub= 1)+
+  prior(normal( 0.5 ,  0.3), nlpar = "Rref", lb=0.01, ub= 1)
 
 message("To see the default priors run: 'priors.trc' ")
 
-TRC_PARMS <- function( data.frame, iterations, priors.trc, idx.colname, NEE.colname, PAR.colname, TA.colname){
+TRC_PARMS_06 <- function( data.frame, iterations, priors.trc, idx.colname, Reco.colname, TA.colname, PAR.colname){
   
-  data.frame$nee <- data.frame[,NEE.colname]
+  data.frame$nee <- data.frame[,Reco.colname]
   data.frame$idx <- data.frame[,idx.colname]
-  data.frame$PAR <- data.frame[,PAR.colname]
   data.frame$TA <- data.frame[,TA.colname]
+  data.frame$PAR <- data.frame[,PAR.colname]
   
-  df <- data.frame %>% select(idx, nee, PAR, TA)
+  data.frame$TA <-data.frame$TA+273.15 #celsius to kelvin
+  
+  df <- data.frame %>% select(idx, Reco, TA, PAR)
   
   if( c("idx") %in% names(df) ) {
     print("GREAT JOB! your dataframe contains idx")
-  } else{ print("The dataframe must include: idx,  nee, TA, and PAR")}
+  } else{ print("The dataframe must include: idx,  Reco, TA")}
   
-  if( c("nee") %in% names(df) ) {
-    print("YIPEE! your dataframe contains nee")
-  }  else{ print("The dataframe must include: idx,  nee, TA, and PAR")}
+  if( c("Reco") %in% names(df) ) {
+    print("YIPEE! your dataframe contains Reco")
+  }  else{ print("The dataframe must include: idx,  Reco, TA")}
   
   if( c("PAR") %in% names(df) ) {
     print("Hooray! your dataframe contains PAR")
-  } else{ print("The dataframe must include: idx,  nee, TA, and PAR")}
-  
+  } else{ print("The dataframe must include: idx,  nee, and PAR")}
+
   if( c("TA") %in% names(df) ) {
     print("Hooray! your dataframe contains TA")
-  } else{ print("The dataframe must include: idx,  nee, TA, and PAR")}
-  try(equation <- nee ~ a * exp(b*TA) , silent =T)
+  } else{ print("The dataframe must include: idx,  Reco, TA")}
+  try(equation <- Reco ~ Rref * exp((Ea/R)*((1/Tref)-(1/TA))) , silent =T)
   
   # PARM Dataframe:
   try(parms <- data.frame(idx=as.character(), 
-                      a.mean = as.numeric(), 
-                      a.se = as.numeric(),
-                      a.Bulk_ESS= as.numeric() ,
-                      a.Tail_ESS= as.numeric() ,
-                      a.Rhat= as.numeric(),
-                      
-                      b.mean = as.numeric(),
-                      b.se = as.numeric(),
-                      b.Bulk_ESS= as.numeric() ,
-                      b.Tail_ESS= as.numeric() ,
-                      b.Rhat= as.numeric(),
-                      samples= as.numeric()), silent = T)
+                          Ea.mean = as.numeric(), 
+                          Ea.se = as.numeric(),
+                          Ea.Bulk_ESS= as.numeric() ,
+                          Ea.Tail_ESS= as.numeric() ,
+                          Ea.Rhat= as.numeric(),
+                          
+                          Rref.mean = as.numeric(),
+                          Rref.se = as.numeric(),
+                          Rref.Bulk_ESS= as.numeric() ,
+                          Rref.Tail_ESS= as.numeric() ,
+                          Rref.Rhat= as.numeric(),
+                          samples= as.numeric()), silent = T)
   
   message(" Your dataframe looks good and you are now ready to start fitting models")
   
@@ -86,47 +84,48 @@ TRC_PARMS <- function( data.frame, iterations, priors.trc, idx.colname, NEE.coln
     print(i)
     
     # Subset the file:
-    try( df.sub <- df %>% filter(idx == i, PAR < 10), silent= T)
+    df.sub <- try(df %>% filter(idx == i, PAR < 10), silent = TRUE)
+
     # get priors:
-    
+    print(df.sub)
     # priors <- get_prior(bf(equation, a1+ax+r ~ 1, nl=TRUE),
     #                    data = df %>% filter(PAR > 0),
     #                    family = poisson())
-    try(model.brms <-  brm( bf(nee ~ a * exp(b*TA),a+b ~ 1, nl=TRUE),
-                        prior = priors.trc , data = df.sub, 
-                        backend = "cmdstanr", iter = iterations, cores =4, seed=101), silent= F)
+    try(model.brms <-  brm( bf(Reco ~ Rref * exp((Ea/8.314)*((1/298)-(1/TA))),Ea+Rref ~ 1, nl=TRUE),
+                            prior = priors.trc , data = df.sub, 
+                            backend = "cmdstanr", iter = iterations, cores =4, seed=101), silent= F)
     
     print(model.brms)
     
     try(model.brms.df <- summary(model.brms)$fixed , silent= F)
     
-    try(model.brms.df.a <- model.brms.df %>% filter( row.names(model.brms.df) == 'a_Intercept'), silent= F)
-    try(model.brms.df.b <- model.brms.df %>% filter( row.names(model.brms.df) == 'b_Intercept'), silent= F)
+    try(model.brms.df.a <- model.brms.df %>% filter( row.names(model.brms.df) == 'Ea_Intercept'), silent= F)
+    try(model.brms.df.b <- model.brms.df %>% filter( row.names(model.brms.df) == 'Rref_Intercept'), silent= F)
     
     try(samples <- data.frame %>% filter(YearMon == i)%>% select(nee)  %>% na.omit %>% nrow , silent= F)
     try(baseline <- as.Date(paste(i, '-01', sep="")) %>% lubridate::days_in_month() *48 %>% as.numeric, silent= F)
     
     
     try(results <- data.frame( idx = i, 
-                           a.mean = model.brms.df.a$Estimate ,
-                           a.se = model.brms.df.a$Est.Error ,
-                           a.Bulk_ESS = model.brms.df.a$Bulk_ESS , 
-                           a.Tail_ESS = model.brms.df.a$Tail_ESS ,
-                           a.Rhat = model.brms.df.a$Rhat ,
-                           
-                           b.mean = model.brms.df.b$Estimate ,
-                           b.se = model.brms.df.b$Est.Error ,
-                           b.Bulk_ESS = model.brms.df.b$Bulk_ESS , 
-                           b.Tail_ESS = model.brms.df.b$Tail_ESS ,
-                           b.Rhat = model.brms.df.b$Rhat,
-                           samples= samples/baseline *100 ), silent= T)
+                               Ea.mean = model.brms.df.Ea$Estimate ,
+                               Ea.se = model.brms.df.Ea$Est.Error ,
+                               Ea.Bulk_ESS = model.brms.df.Ea$Bulk_ESS , 
+                               Ea.Tail_ESS = model.brms.df.Ea$Tail_ESS ,
+                               Ea.Rhat = model.brms.df.Ea$Rhat ,
+                               
+                               Rref.mean = model.brms.df.Rref$Estimate ,
+                               Rref.se = model.brms.df.Rref$Est.Error ,
+                               Rref.Bulk_ESS = model.brms.df.Rref$Bulk_ESS , 
+                               Rref.Tail_ESS = model.brms.df.Rref$Tail_ESS ,
+                               Rref.Rhat = model.brms.df.Rref$Rhat,
+                               samples= samples/baseline *100 ), silent= T)
     
     message( 'YOUR DID IT!')
     print( results) 
     try( parms <- parms %>% rbind(results), silent= T)
     
   }
-   
+  
   return(parms ) 
 }
 
