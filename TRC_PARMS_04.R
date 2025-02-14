@@ -25,7 +25,7 @@ message("This function uses the equation:
         
         Reco ~ Rref * Q10 exp((TA-Tref)/10 ) 
         
-        TA must be in kelvin")
+        TA must be in C")
 
 
 
