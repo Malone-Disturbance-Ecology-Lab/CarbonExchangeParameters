@@ -19,7 +19,8 @@ library(tidyverse)
 library(ggpubr)
 
 # Example of priors: 
-priors.trc <- prior(normal( 0.5 ,  0.03), nlpar = "b", lb=0.001, ub= 0.09)
+priors.trc <- prior(prior(default(), nlpar = "Rref") + 
+                    prior(default(), nlpar = "E0"))
 
 TRC_PARMS <- function( data.frame, iterations, priors.trc, idx, nee, PAR, TA){
   
