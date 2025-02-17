@@ -6,11 +6,6 @@ Flux partitioning methods can use a light response curve (LRC). We can use dayti
 
 Here are some common methods for partitioning carbon fluxes:
 
-|Function_Name	|Equation |
-|---------------|-------------------------------------------|
-|LRC_PARMS_01	  | $$NEE = \frac{a_1 \cdot \text{PAR} \cdot a_x}{a_1 \cdot \text{PAR} + a_x} - r $$ |
-|LRC_PARMS_01	  |$$NEE = \frac{aPAR \cdot \text{PAR} \cdot Pmax}{aPAR \cdot \text{PAR} + Pmax} - R_d $$        |
-|LRC_PARMS_02	  |NEE = ((a*PAR+Pmax-(sqrt((a*PAR+Pmax)^2-(4*PAR*a*Pmax))))/(2*Theta))-Rd|
 |LRC_PARMS_03	  |NEE = Pmax*(1-exp(-a*PAR/Pmax))-Rd |
 |LRC_PARMS_04	  |NEE = a*(1-B*PAR/1+Y*PAR)-Rd|
 |LRC_PARMS_05	  |NEE = -a*exp(-B*PAR)-Y*exp(Z*PAR)|
