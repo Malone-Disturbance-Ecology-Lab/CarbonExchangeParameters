@@ -16,8 +16,7 @@ Here are some common methods for partitioning carbon fluxes:
 |LRC_PARMS_05	  | $$NEE = -a \cdot \exp(-B \cdot \text{PAR}) - Y \cdot \exp(Z \cdot \text{PAR}) $$| NEE; PAR|
 |LRC_PARMS_06	  | $$NEE = P_m \left( 1 - \exp \left( a \cdot \left( \text{PAR} - I_{\text{comp}} \right) \right) \right) $$ | NEE; PAR|
 |LRC_PARMS_07	  | $$NEE = \frac{a_1 \cdot \text{PAR} \cdot \beta}{a_1 \cdot \text{PAR} + \beta} $$| NEE; PAR; VPD|
-|TRC_PARMS_01   | $$\text{Reco} = r_b \cdot \exp \left( E_0 \left( \left( \frac{1}{T_{\text{ref}}} - T_0 \right) - \left( \frac{1}{T_{\text{air}}} - T_0 \right) \right) \right)
-$$| NEE; T|
+|TRC_PARMS_01   | $$\text{Reco} = r_b \cdot \exp \left( E_0 \left( \left( \frac{1}{T_{\text{ref}}} - T_0 \right) - \left( \frac{1}{T_{\text{air}}} - T_0 \right) \right) \right)$$| NEE; T|
 |TRC_PARMS_02   | $$\text{Reco} = r_0 \cdot \exp \left( \alpha \cdot T + \beta \cdot T^2 \right) $$|NEE; T |
 |TRC_PARMS_03   | $$\text{Reco} = a \left( T - T_{\text{opt}} \right)^2 + E_{\text{Rmax}} $$|NEE; T|
 |TRC_PARMS_04   | $$\text{Reco} = R_{\text{ref}} \cdot Q_{10} \cdot \exp \left( \frac{T - T_{\text{ref}}}{10} \right) $$| NEE; T|
