@@ -1,6 +1,6 @@
 ## Carbon Exchange Parameters
 
-Ecosystem CO[2] Flux Partitioning (EC flux partitioning) methods are used to estimate how the total carbon flux between an ecosystem and the atmosphere is divided among different processes, such as photosynthesis (carbon uptake) and respiration (carbon release). These methods are important for understanding the carbon balance of ecosystems. 
+Ecosystem CO<sub>2</sub> Flux Partitioning (EC flux partitioning) methods are used to estimate how the total carbon flux between an ecosystem and the atmosphere is divided among different processes, such as photosynthesis (carbon uptake) and respiration (carbon release). These methods are important for understanding the carbon balance of ecosystems. 
 
 Flux partitioning methods can use a light response curve (LRC). We can use daytime NEE (NEE[day]) from tower sites to fit LRCs and nighttime NEE (NEE[night]) to estimate ecosystem respiration with temperature response curves (TRC) at night. 
 
