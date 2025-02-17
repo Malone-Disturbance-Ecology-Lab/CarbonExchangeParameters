@@ -15,4 +15,4 @@ Here are some common methods for partitioning carbon fluxes:
 |LRC_PARMS_04	  | $$NEE = a \left( 1 - \frac{B \cdot \text{PAR}}{1 + Y \cdot \text{PAR}} \right) - R_d $$| PAR|
 |LRC_PARMS_05	  | $$NEE = -a \cdot \exp(-B \cdot \text{PAR}) - Y \cdot \exp(Z \cdot \text{PAR}) $$| PAR|
 |LRC_PARMS_06	  |$$NEE = P_m \left( 1 - \exp \left( a \cdot \left( \text{PAR} - I_{\text{comp}} \right) \right) \right) $$ | PAR|
-|LRC_PARMS_07	  | $$NEE = \frac{a_1 \cdot \text{PAR} \cdot \beta}{a_1 \cdot \text{PAR} + \beta $$| PAR; VPD|
+|LRC_PARMS_07	  | $$NEE = \frac{a_1 \cdot \text{PAR} \cdot \beta}{a_1 \cdot \text{PAR} + \beta} $$| PAR; VPD|
