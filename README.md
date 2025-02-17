@@ -8,7 +8,7 @@ Here are some common methods for partitioning carbon fluxes:
 
 |Function_Name	|Equation |
 |---------------|-------------------------------------------|
-|LRC_PARMS_01	  | $$NEE =  (a1 * PAR * ax)/(a1 * PAR + ax) - r $$ |
+|LRC_PARMS_01	  | $$NEE = \frac{a_1 \cdot \text{PAR} \cdot a_x}{a_1 \cdot \text{PAR} + a_x} - r $$ |
 |LRC_PARMS_01	  |NEE = (a*PAR*Pmax))/(a*PAR+Pmax)-Rd        |
 |LRC_PARMS_02	  |NEE = ((a*PAR+Pmax-(sqrt((a*PAR+Pmax)^2-(4*PAR*a*Pmax))))/(2*Theta))-Rd|
 |LRC_PARMS_03	  |NEE = Pmax*(1-exp(-a*PAR/Pmax))-Rd |
