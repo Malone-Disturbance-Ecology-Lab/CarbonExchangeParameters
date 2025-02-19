@@ -31,7 +31,7 @@ message("This function uses the equation:
         Topt = optimum temperature, a parameter, vertex of the parabola
         ERmax =maximum respiration, a parameter, vertex of the parabola
         
-        The equations require T (celcius) and NEE (𝜇mol m-2 s-1)
+        The equations require T (celcius) PAR (𝜇mol m-2 s-1), and NEE (𝜇mol m-2 s-1)
        
     
         Reference: https://www.nature.com/articles/s41559-023-02121-w#Equ1
