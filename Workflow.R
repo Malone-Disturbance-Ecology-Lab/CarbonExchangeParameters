@@ -35,7 +35,7 @@ test.TRC.parms <- TRC_PARMS_06(data.frame=srs6.sub ,
                             idx.colname='YearMon', 
                             priors = priors.trc, 
                             iterations = 4000,
-                            Reco.colname='Reco', 
+                            NEE.colname='NEE', 
                             TA.colname = 'TA',
                             PAR.colname = 'PAR')
 

@@ -6,6 +6,10 @@ library(ggplot2)
 library(beepr)
 library(tidybayes)
 
+###This is LRC_PARMS_02
+
+
+
 #this is an edit
 source("/Users/sm3466/YSE Dropbox/Sparkle Malone/Research/CarbonExchangeParameters/SampleData/05_Flow_SRS6Fix.R" )
 
