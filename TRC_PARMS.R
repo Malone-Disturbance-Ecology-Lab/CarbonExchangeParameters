@@ -18,24 +18,21 @@ library(tidybayes)
 library(tidyverse)
 library(ggpubr)
 
-message("Using the LRC_PARMS function requires the following libraries: brms, 
+message("Using the TRC_PARMS function requires the following libraries: brms, 
         cmdstanr, ggplot2, beepr, tidybayes, tidyverse, and ggpubr.")
 
 message("This function uses the equation:
         
-        nee ~ ((a1 * PAR * ax)/(α * PAR + ax)) - r
+        nee ~ a * exp(b*TA)
+  
         
-        Where r is ecosystem respiration (𝜇mol CO2 m-2 s-1), 
-        a1 is the apparent quantum efficiency of CO2 uptake (CO2),
-        and ax is the maximum CO2 uptake rate on the ecosystem scale.
-        
-        The equations require PAR (𝜇mol m-2 s-1) and NEE (𝜇mol m-2 s-1)")
+        The equation requires NEE (𝜇mol m-2 s-1) andair temperature")
 
 
 
 # Example of priors: 
-priors.trc <- prior(prior(default(), nlpar = "Rref") + 
-                    prior(default(), nlpar = "E0"))
+priors.ts1.trc <-  prior(normal(0.2 , 1), nlpar = "a", lb=0.1, ub= 1) +
+  prior(normal( 0.5 ,  0.03), nlpar = "b", lb=0.001, ub= 0.9)
 
 message("To see the default priors run: 'priors.trc' ")
 
@@ -89,9 +86,6 @@ TRC_PARMS <- function( data.frame, iterations, priors.trc, idx.colname, NEE.coln
     try( df.sub <- df %>% filter(idx == i, PAR < 10), silent= T)
     # get priors:
     
-    # priors <- get_prior(bf(equation, a1+ax+r ~ 1, nl=TRUE),
-    #                    data = df %>% filter(PAR > 0),
-    #                    family = poisson())
     try(model.brms <-  brm( bf(nee ~ a * exp(b*TA),a+b ~ 1, nl=TRUE),
                         prior = priors.trc , data = df.sub, 
                         backend = "cmdstanr", iter = iterations, cores =4, seed=101), silent= F)
