@@ -23,14 +23,14 @@ message("Using the LRC_PARMS function requires the following libraries: brms,
 
 message("This function uses the equation:
         
-             nee ~ ax * (1 - exp(-a1 * PAR / ax)) - r  (exponential equation)
+             nee ~ Pmax * (1 - exp(-a * PAR / Pmax)) - Rd  (exponential equation)
   
           or nee ~ Pmax*(1-exp(-a*PAR/Pmax))-Rd  (equation in paper format)
           where NEE= net ecosystem exchange in 𝜇mol m-2 s-1
-                ax=Pmax is light-saturated net photosynthetic rate, a parameter
-                a1=a is the initial quantum efficiency or intrinsic quantum yield , a parameter
+                Pmax is light-saturated net photosynthetic rate, a parameter
+                a is the initial quantum efficiency or intrinsic quantum yield , a parameter
                 PAR = Photosynthetically active radiation in mol m-2 s-1
-                r=Rd is dark respiration rate, a parameter
+                Rd is dark respiration rate, a parameter
 
   
           The equations require PAR (𝜇mol m-2 s-1) and NEE (𝜇mol m-2 s-1)
@@ -42,9 +42,9 @@ message("This function uses the equation:
 
 # Example of priors: 
 
-priors.lrc <-  prior(normal(-9.9, 0.4), nlpar = "ax", lb=-15, ub= 1) +
-  prior(normal( -0.05 ,  0.1), nlpar = "a1", lb=-0.2, ub= 0.5) +
-  prior(normal(1.2, 0.11), nlpar = "r", lb=1.0, ub= 3.2)
+priors.lrc <-  prior(normal(-9.9, 0.4), nlpar = "Pmax", lb=-15, ub= 1) +
+  prior(normal( -0.05 ,  0.1), nlpar = "a", lb=-0.2, ub= 0.5) +
+  prior(normal(1.2, 0.11), nlpar = "Rd", lb=1.0, ub= 3.2)
 
 
 
@@ -61,7 +61,7 @@ LRC_PARM_03 <- function( data.frame, iterations, priors.lrc, idx.colname, NEE.co
                               nee,
                               PAR)
   
-  equation <- nee ~ ax * (1 - exp(-a1 * PAR / ax)) - r
+  equation <- nee ~ Pmax * (1 - exp(-a * PAR / Pmax)) - Rd
 
   
   if( c("idx") %in% names(df) ) {
@@ -80,23 +80,23 @@ LRC_PARM_03 <- function( data.frame, iterations, priors.lrc, idx.colname, NEE.co
   # PARM Dataframe:
   
   parms <- data.frame(idx=as.character(), 
-                      ax.mean = as.numeric(), 
-                      ax.se = as.numeric(),
-                      ax.Bulk_ESS= as.numeric() ,
-                      ax.Tail_ESS= as.numeric() ,
-                      ax.Rhat= as.numeric(),
+                      Pmax.mean = as.numeric(), 
+                      Pmax.se = as.numeric(),
+                      Pmax.Bulk_ESS= as.numeric() ,
+                      Pmax.Tail_ESS= as.numeric() ,
+                      Pmax.Rhat= as.numeric(),
                       
-                      a1.mean = as.numeric(),
-                      a1.se = as.numeric(),
-                      a1.Bulk_ESS= as.numeric() ,
-                      a1.Tail_ESS= as.numeric() ,
-                      a1.Rhat= as.numeric(),
+                      a.mean = as.numeric(),
+                      a.se = as.numeric(),
+                      a.Bulk_ESS= as.numeric() ,
+                      a.Tail_ESS= as.numeric() ,
+                      a.Rhat= as.numeric(),
                       
-                      r.mean = as.numeric(),
-                      r.se= as.numeric(),
-                      r.Bulk_ESS= as.numeric() ,
-                      r.Tail_ESS= as.numeric() ,
-                      r.Rhat= as.numeric(),
+                      Rd.mean = as.numeric(),
+                      Rd.se= as.numeric(),
+                      Rd.Bulk_ESS= as.numeric() ,
+                      Rd.Tail_ESS= as.numeric() ,
+                      Rd.Rhat= as.numeric(),
                       samples= as.numeric()
                       
                       
@@ -112,17 +112,17 @@ LRC_PARM_03 <- function( data.frame, iterations, priors.lrc, idx.colname, NEE.co
     df.sub <- df %>% filter(idx == i, PAR > 0) %>% na.omit
     
     # get priors:
-    #priors <- get_prior(bf(equation, a1+ax+r ~ 1, nl=TRUE),data = df %>% filter(PAR > 0), family = poisson())
+    #priors <- get_prior(bf(equation, a+Pmax+Rd ~ 1, nl=TRUE),data = df %>% filter(PAR > 0), family = poisson())
     
-    try(model.brms <- brm( bf( equation, ax+a1+r ~ 1, nl=TRUE),
+    try(model.brms <- brm( bf( equation, a+Pmax+Rd ~ 1, nl=TRUE),
                            prior = priors.lrc , data = df, iter = iterations, cores =3, chains = 1, backend = "cmdstanr"), silent= F)
     
     print(model.brms)
     
     try(model.brms.df <- summary(model.brms)$fixed , silent = T)
-    try(model.brms.df.ax <- model.brms.df %>% filter( row.names(model.brms.df) == 'ax_Intercept'), silent = F)
-    try( model.brms.df.a1 <- model.brms.df %>% filter( row.names(model.brms.df) == 'a1_Intercept'), silent = F)
-    try(model.brms.df.r <- model.brms.df %>% filter( row.names(model.brms.df) == 'r_Intercept'), silent = F)
+    try(model.brms.df.Pmax <- model.brms.df %>% filter( row.names(model.brms.df) == 'Pmax_Intercept'), silent = F)
+    try( model.brms.df.a <- model.brms.df %>% filter( row.names(model.brms.df) == 'a_Intercept'), silent = F)
+    try(model.brms.df.Rd <- model.brms.df %>% filter( row.names(model.brms.df) == 'Rd_Intercept'), silent = F)
 
     samples <- data.frame %>% filter(YearMon == i)%>% select(nee)  %>% na.omit %>% nrow
     
@@ -130,23 +130,23 @@ LRC_PARM_03 <- function( data.frame, iterations, priors.lrc, idx.colname, NEE.co
     
     
     try(results <- data.frame( idx = i, 
-                               ax.mean = model.brms.df.ax$Estimate ,
-                               ax.se = model.brms.df.ax$Est.Error ,
-                               ax.Bulk_ESS = model.brms.df.ax$Bulk_ESS , 
-                               ax.Tail_ESS = model.brms.df.ax$Tail_ESS ,
-                               ax.Rhat = model.brms.df.ax$Rhat ,
+                               Pmax.mean = model.brms.df.Pmax$Estimate ,
+                               Pmax.se = model.brms.df.Pmax$Est.Error ,
+                               Pmax.Bulk_ESS = model.brms.df.Pmax$Bulk_ESS , 
+                               Pmax.Tail_ESS = model.brms.df.Pmax$Tail_ESS ,
+                               Pmax.Rhat = model.brms.df.Pmax$Rhat ,
                                
-                               a1.mean = model.brms.df.a1$Estimate ,
-                               a1.se = model.brms.df.a1$Est.Error ,
-                               a1.Bulk_ESS = model.brms.df.a1$Bulk_ESS , 
-                               a1.Tail_ESS = model.brms.df.a1$Tail_ESS ,
-                               a1.Rhat = model.brms.df.a1$Rhat ,
+                               a.mean = model.brms.df.a$Estimate ,
+                               a.se = model.brms.df.a$Est.Error ,
+                               a.Bulk_ESS = model.brms.df.a$Bulk_ESS , 
+                               a.Tail_ESS = model.brms.df.a$Tail_ESS ,
+                               a.Rhat = model.brms.df.a$Rhat ,
                                
-                               r.mean = model.brms.df.r$Estimate ,
-                               r.se = model.brms.df.r$Est.Error ,
-                               r.Bulk_ESS = model.brms.df.r$Bulk_ESS , 
-                               r.Tail_ESS = model.brms.df.r$Tail_ESS ,
-                               r.Rhat = model.brms.df.r$Rhat,
+                               Rd.mean = model.brms.df.Rd$Estimate ,
+                               Rd.se = model.brms.df.Rd$Est.Error ,
+                               Rd.Bulk_ESS = model.brms.df.Rd$Bulk_ESS , 
+                               Rd.Tail_ESS = model.brms.df.Rd$Tail_ESS ,
+                               Rd.Rhat = model.brms.df.Rd$Rhat,
                                
                                samples= samples/baseline *100), silent = T)
     
