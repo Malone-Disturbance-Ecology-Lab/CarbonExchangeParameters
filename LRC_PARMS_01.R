@@ -23,7 +23,7 @@ message("Using the LRC_PARMS function requires the following libraries: brms,
 
 message("This function uses the equation:
         
-        nee ~ ((a1 * PAR * ax)/(α * PAR + ax)) - r
+        NEE ~ ((a1 * PAR * ax)/(α * PAR + ax)) - r
         
         Where r is ecosystem respiration (𝜇mol CO2 m-2 s-1), 
         a1 is the apparent quantum efficiency of CO2 uptake (CO2),

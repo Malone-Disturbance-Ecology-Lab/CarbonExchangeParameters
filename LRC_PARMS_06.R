@@ -23,7 +23,7 @@ message("Using the LRC_PARMS function requires the following libraries: brms,
 
 message("This function uses the equation:
         
-        nee ~ Pm * (1 - exp(alpha * (PAR - Icomp)))
+        NEE ~ Pm * (1 - exp(alpha * (PAR - Icomp)))
         
         Where nee is daytime net ecosystem exchange (𝜇mol CO2 m-2 s-1), 
         Pm: the maximum photosynthesis rate (𝜇mol CO2 m-2 s-1), 
