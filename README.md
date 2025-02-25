@@ -14,7 +14,7 @@ Here are some common methods for partitioning carbon fluxes:
 |LRC_PARMS_03	  | $$NEE_{\text{day}} = a_x \left( 1 - \exp \left( -\frac{a_1 \cdot \text{PAR}}{a_{\text{x}}} \right) \right) - r$$ | NEE; PAR|
 |LRC_PARMS_04	  | $$NEE_{\text{day}} = a_1 \left( 1 - \frac{B \cdot \text{PAR}}{1 + Y \cdot \text{PAR}} \right) - r $$| NEE; PAR|
 |LRC_PARMS_05	  | $$NEE_{\text{day}} = -a_1 \cdot \exp(-B \cdot \text{PAR}) - Y \cdot \exp(Z \cdot \text{PAR}) $$| NEE; PAR|
-|LRC_PARMS_06	  | $$NEE_{\text{day}} = a_x \left( 1 - \exp \left( a_1 \cdot \left( \text{PAR} - I_{\text{comp}} \right) \right) \right) $$ | NEE; PAR|
+|LRC_PARMS_06	  | $$NEE_{\text{day}} = Pm \left( 1 - \exp \left( a_1 \cdot \left( \text{PAR} - I_{\text{comp}} \right) \right) \right) $$ | NEE; PAR|
 |LRC_PARMS_07	  | $$NEE_{\text{day}} = \frac{a_1 \cdot \text{PAR} \cdot \beta}{a_1 \cdot \text{PAR} + \beta} $$| NEE; PAR; VPD|
 |TRC_PARMS_01   | $$NEE_{\text{day}} = r_b \cdot \exp \left( E_0 \left( \left( \frac{1}{T_{\text{ref}}} - T_0 \right) - \left( \frac{1}{T_{\text{air}}} - T_0 \right) \right) \right)$$| NEE; T|
 |TRC_PARMS_02   | $$NEE_{\text{night}} = r_0 \cdot \exp \left( \alpha \cdot T + \beta \cdot T^2 \right) $$|NEE; T |
