@@ -20,7 +20,7 @@ Here are some common methods for partitioning carbon fluxes:
 |TRC_PARMS_02   | $$NEE_{\text{night}} = r_0 \cdot \exp \left( \alpha \cdot T + \beta \cdot T^2 \right) $$|NEE; T |
 |TRC_PARMS_03   | $$NEE_{\text{night}} = a \left( T - T_{\text{opt}} \right)^2 + E_{\text{Rmax}} $$|NEE; T|
 |TRC_PARMS_04   | $$NEE_{\text{night}} = R_{\text{ref}} \cdot Q_{10} \cdot \exp \left( \frac{T - T_{\text{ref}}}{10} \right) $$| NEE; T|
-|TRC_PARMS_05   | $$NEE_{\text{night}} = f_0 + s_1 \cdot \sin(D_{\pi}) + c_1 \cdot \cos(D_{\pi}) + s_2 \cdot \sin(2 \cdot D_{\pi}) + c_2 \cdot \cos(2 \cdot D_{\pi}) $$|NEE; ? |
+|TRC_PARMS_05   | $$NEE_{\text{night}} = a \cdot \exp \left( b \cdot T \right) $$|NEE; T|
 |TRC_PARMS_06   | $$NEE_{\text{night}} = R_{\text{ref}} \cdot \exp \left( \frac{E_a}{R} \left( \frac{1}{T_{\text{ref}}} - \frac{1}{T} \right) \right) $$|NEE; T|
-|TRC_PARMS_07   | $$NEE_{\text{night}} = a \cdot \exp \left( b \cdot T \right) $$|NEE; T|
+
 
