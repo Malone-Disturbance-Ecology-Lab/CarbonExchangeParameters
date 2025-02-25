@@ -23,17 +23,17 @@ message("Using the LRC_PARMS function requires the following libraries: brms,
 
 message("This function uses the equation:
         
-        NEE ~ Pmax * (1 - exp(alpha * (PAR - Icomp)))
+        NEE ~ ax * (1 - exp(alpha * (PAR - Icomp)))
         
         Where nee is daytime net ecosystem exchange (𝜇mol CO2 m-2 s-1), 
-        Pmax: the maximum photosynthesis rate (𝜇mol CO2 m-2 s-1), 
+        ax: the maximum photosynthesis rate (𝜇mol CO2 m-2 s-1), 
         alpha is a coefficient,
         Icomp is the compensation light level with the same unit of PAR.
         
         The equations require PAR (𝜇mol m-2 s-1) and NEE (𝜇mol m-2 s-1)")
 
 
-priors.lrc <-  prior(normal(-5, 5), nlpar = "Pmax", lb=-30, ub= 0) +
+priors.lrc <-  prior(normal(-5, 5), nlpar = "ax", lb=-30, ub= 0) +
   prior(normal(0.1, 1), nlpar = "alpha", lb=0, ub= 1) +
   prior(normal(300, 100), nlpar = "Icomp", lb=0, ub= 500)
 
@@ -50,7 +50,7 @@ LRC_PARMS_06 <- function( data.frame, iterations, priors.lrc, idx.colname, NEE.c
                               nee,
                               PAR)
   
-  equation <- nee ~ Pmax * (1 - exp(alpha * (PAR - Icomp)))
+  equation <- nee ~ ax * (1 - exp(alpha * (PAR - Icomp)))
   
   
   if( c("idx") %in% names(df) ) {
@@ -67,11 +67,11 @@ LRC_PARMS_06 <- function( data.frame, iterations, priors.lrc, idx.colname, NEE.c
   
   # PARM Dataframe:
   parms <- data.frame(idx=as.character(), 
-                      Pmax.mean = as.numeric(), 
-                      Pmax.se = as.numeric(),
-                      Pmax.Bulk_ESS= as.numeric() ,
-                      Pmax.Tail_ESS= as.numeric() ,
-                      Pmax.Rhat= as.numeric(),
+                      ax.mean = as.numeric(), 
+                      ax.se = as.numeric(),
+                      ax.Bulk_ESS= as.numeric() ,
+                      ax.Tail_ESS= as.numeric() ,
+                      ax.Rhat= as.numeric(),
                       
                       alpha.mean = as.numeric(),
                       alpha.se = as.numeric(),
@@ -97,13 +97,13 @@ LRC_PARMS_06 <- function( data.frame, iterations, priors.lrc, idx.colname, NEE.c
     # get priors:
     #priors <- get_prior(bf(equation, a1+ax+r ~ 1, nl=TRUE),data = df %>% filter(PAR > 0), family = poisson())
     
-    try(model.brms <- brm( bf( equation, Pmax+alpha+Icomp ~ 1, nl=TRUE), prior = priors.lrc, 
+    try(model.brms <- brm( bf( equation, ax+alpha+Icomp ~ 1, nl=TRUE), prior = priors.lrc, 
                            data = df.sub, iter = iterations, cores =3, chains = 1, backend = "cmdstanr"), silent= F)
     # Here it should be df.sub
     print(model.brms)
     
     try(model.brms.df <- summary(model.brms)$fixed , silent = T)
-    try(model.brms.df.Pmax <- model.brms.df %>% filter( row.names(model.brms.df) == 'Pmax_Intercept'), silent = F)
+    try(model.brms.df.ax <- model.brms.df %>% filter( row.names(model.brms.df) == 'ax_Intercept'), silent = F)
     try(model.brms.df.alpha <- model.brms.df %>% filter( row.names(model.brms.df) == 'alpha_Intercept'), silent = F)
     try(model.brms.df.Icomp <- model.brms.df %>% filter( row.names(model.brms.df) == 'Icomp_Intercept'), silent = F)
     
@@ -112,11 +112,11 @@ LRC_PARMS_06 <- function( data.frame, iterations, priors.lrc, idx.colname, NEE.c
     baseline <- as.Date(paste(i, '-01', sep="")) %>% lubridate::days_in_month() *48 %>% as.numeric
     
     try(results <- data.frame( idx = i, 
-                               Pmax.mean = model.brms.df.Pmax$Estimate ,
-                               Pmax.se = model.brms.df.Pmax$Est.Error ,
-                               Pmax.Bulk_ESS = model.brms.df.Pmax$Bulk_ESS , 
-                               Pmax.Tail_ESS = model.brms.df.Pmax$Tail_ESS ,
-                               Pmax.Rhat = model.brms.df.Pmax$Rhat ,
+                               ax.mean = model.brms.df.ax$Estimate ,
+                               ax.se = model.brms.df.ax$Est.Error ,
+                               ax.Bulk_ESS = model.brms.df.ax$Bulk_ESS , 
+                               ax.Tail_ESS = model.brms.df.ax$Tail_ESS ,
+                               ax.Rhat = model.brms.df.ax$Rhat ,
                                
                                alpha.mean = model.brms.df.alpha$Estimate ,
                                alpha.se = model.brms.df.alpha$Est.Error ,
