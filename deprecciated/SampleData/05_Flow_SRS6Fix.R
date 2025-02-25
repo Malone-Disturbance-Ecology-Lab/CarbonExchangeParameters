@@ -1,6 +1,7 @@
 # rm(list=ls())
 
 library(lubridate)
+library(dplyr)
 
 srs6.data <- read.csv('/Volumes/MaloneLab/Research/ENP/Everglades_MODIS_LAI_TS/SRS6_datatable.csv') %>% 
   mutate(TIMESTAMP1 = as.POSIXct(dates, '%d-%b-%Y %H:%M:%S', tz = "US/Eastern"))
