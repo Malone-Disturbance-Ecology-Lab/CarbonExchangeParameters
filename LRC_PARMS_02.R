@@ -153,7 +153,7 @@ LRC_PARMS <- function( data.frame, iterations, priors.lrc, idx.colname, NEE.coln
                                
                                samples= samples/baseline *100), silent = T)
     
-    message( 'YOUR DID IT!')
+    message( 'YOU DID IT!')
     
     print(results)
     
