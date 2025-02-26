@@ -8,6 +8,16 @@ Here are some common methods for partitioning carbon fluxes:
 
 |Function_Name	|Equation | Data Needed | 
 |---------------|-------------------------------------------|---------------|
+## Carbon Exchange Parameters
+
+Ecosystem CO<sub>2</sub> Flux Partitioning (EC flux partitioning) methods are used to estimate how the total carbon flux between an ecosystem and the atmosphere is divided among different processes, such as photosynthesis (carbon uptake) and respiration (carbon release). These methods are important for understanding the carbon balance of ecosystems. 
+
+Flux partitioning methods can use a light response curve (LRC). We can use daytime NEE (NEE<sub>day</sub>) from tower sites to fit LRCs and nighttime NEE (NEE<sub>night</sub>) to estimate ecosystem respiration with temperature response curves (TRC) at night. 
+
+Here are some common methods for partitioning carbon fluxes:
+
+|Function_Name	|Equation | Data Needed | 
+|---------------|-------------------------------------------|---------------|
 |LRC_PARMS_01	  | $$NEE_{\text{day}} = \frac{a_1 \cdot \text{PAR} \cdot a_x}{a_1 \cdot \text{PAR} + a_x} - r$$ | NEE; PAR|
 |LRC_PARMS_02	  | $$NEE_{\text{day}} = \frac{a_1 \cdot \text{PAR} + a_{\text{x}} - \sqrt{(a_1 \cdot \text{PAR} + a_{\text{x}})^2 - 4 \cdot \text{PAR} \cdot a_1 \cdot a_{\text{x}}}}{2 \cdot \Theta} - r $$| NEE; PAR|
 |LRC_PARMS_03	  | $$NEE_{\text{day}} = a_x \left( 1 - \exp \left( -\frac{a_1 \cdot \text{PAR}}{a_{\text{x}}} \right) \right) - r$$ | NEE; PAR|
