@@ -9,7 +9,6 @@ Here are some common methods for partitioning carbon fluxes:
 |Function_Name	|Equation | Data Needed | 
 |---------------|-------------------------------------------|---------------|
 |LRC_PARMS_01	  | $$NEE_{\text{day}} = \frac{a_1 \cdot \text{PAR} \cdot a_x}{a_1 \cdot \text{PAR} + a_x} - r$$ | NEE; PAR|
-
 |LRC_PARMS_02	  | $$NEE_{\text{day}} = \frac{a_1 \cdot \text{PAR} + a_{\text{x}} - \sqrt{(a_1 \cdot \text{PAR} + a_{\text{x}})^2 - 4 \cdot \text{PAR} \cdot a_1 \cdot a_{\text{x}}}}{2 \cdot \Theta} - r $$| NEE; PAR|
 |LRC_PARMS_03	  | $$NEE_{\text{day}} = a_x \left( 1 - \exp \left( -\frac{a_1 \cdot \text{PAR}}{a_{\text{x}}} \right) \right) - r$$ | NEE; PAR|
 |LRC_PARMS_04	  | $$NEE_{\text{day}} = a_1 \left( 1 - \frac{B \cdot \text{PAR}}{1 + Y \cdot \text{PAR}} \right) - r $$| NEE; PAR|
