@@ -23,7 +23,7 @@ message("Using the LRC_PARMS function requires the following libraries: brms,
 
 message("This function uses the equation:
         
-        nee ~ a1 * ( (1-b*PAR) / (1+(a1/ax)*PAR) ) - r
+        NEE ~ a1 * ( (1-b*PAR) / (1+(a1/ax)*PAR) ) - r
         
         
         Where r is ecosystem respiration (𝜇mol CO2 m-2 s-1), 

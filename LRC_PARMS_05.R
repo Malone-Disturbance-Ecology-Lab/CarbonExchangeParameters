@@ -28,7 +28,7 @@ message("Using the LRC_PARMS function requires the following libraries: brms,
 
 message("This function uses the equation:
         
-        nee ~ -a*exp(-B*PAR)-Y*exp(Z*PAR)
+        NEE ~ -a*exp(-B*PAR)-Y*exp(Z*PAR)
         
         Where B and Y are correction factors in which 
         B is the photoinhibitation item 

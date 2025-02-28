@@ -23,7 +23,7 @@ message("Using the LRC_PARMS function requires the following libraries: brms,
 
 message("This function uses the equation:
         
-        nee ~  r0 * exp(alpha*TA + beta*TA^2)
+        NEE ~  r0 * exp(alpha*TA + beta*TA^2)
         
         Where nee is nighttime nee, that is, ecosystem respiration (𝜇mol CO2 m-2 s-1), 
         TA is air temperature (°C), 

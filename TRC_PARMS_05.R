@@ -23,7 +23,7 @@ message("Using the TRC_PARMS function requires the following libraries: brms,
 
 message("This function uses the equation:
         
-        nee ~ a * exp(b*T)
+        NEE ~ a * exp(b*T)
   
         
         The equation requires NEE (𝜇mol m-2 s-1) and air temperature (T)")

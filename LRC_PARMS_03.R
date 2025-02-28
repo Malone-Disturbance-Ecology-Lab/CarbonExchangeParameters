@@ -23,7 +23,7 @@ message("Using the LRC_PARMS function requires the following libraries: brms,
 
 message("This function uses the equation:
         
-             nee ~ ax * (1 - exp(-a1 * PAR / ax)) - r  (exponential equation)
+             NEE ~ ax * (1 - exp(-a1 * PAR / ax)) - r  (exponential equation)
   
           where NEE= net ecosystem exchange in 𝜇mol m-2 s-1
                 ax is light-saturated net photosynthetic rate, a parameter

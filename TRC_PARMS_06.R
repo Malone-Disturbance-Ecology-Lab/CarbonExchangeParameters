@@ -23,7 +23,7 @@ message("Using the TRC_PARMS function requires the following libraries: brms,
 
 message("This function uses the equation:
         
-        nee ~ Rref * exp((Ea/8.314)*((1/298)-(1/TA)))
+        NEE ~ Rref * exp((Ea/8.314)*((1/298)-(1/TA)))
         
         WARNING: TA must be in kelvin
         

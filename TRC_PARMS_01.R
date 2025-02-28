@@ -23,7 +23,7 @@ message("Using the TRC_PARMS function requires the following libraries: brms,
 
 message("This function uses the equation:
         
-        Reco ~ Rref * exp(E0(1/(Tref - T0) - 1/(Tair - T0)))")
+        NEE ~ Rref * exp(E0(1/(Tref - T0) - 1/(Tair - T0)))")
 
 
 
