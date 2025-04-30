@@ -1,11 +1,46 @@
 Package: CarbonExchangeParameters
-Title: What the Package Does (One Line, Title Case)
+Title: Carbon Flux Partitioning Methods by the Malone Disturbance Ecology Lab
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: c(
+  person(given = "Angel", family = "Chen",
+         email = "angel777chen@gmail.com",
+         comment = "angelchen7.github.io",
+         role = c("aut", "cre")),
+  person(given = "Sparkle L", family = "Malone", 
+         email = "sparkle.malone@yale.edu",
+         comment = c(ORCID = "0000-0001-9034-1076"),
+         role = "aut"),
+  person(given = "Sam", family = "Jurado", 
+         email = "sam.jurado@yale.edu",
+         role = "aut"),
+  person(given = "David E", family = "Reed", 
+         email = "david.e.reed@yale.edu",
+         comment = c(ORCID = "0000-0002-8892-1423"),
+         role = "aut"),
+  person(given = "Junna", family = "Wang", 
+         email = "junna.wang@yale.edu",
+         role = "aut"),
+  person(given = "Boya", family = "Zhang", 
+         email = "boya.zhang@yale.edu",
+         comment = c(ORCID = "0000-0002-6860-2054"),
+         role = "aut"),
+         )
+Description: Carbon flux partitioning functions that use daytime net ecosystem exchange (NEE)
+    from tower sites to fit light response curves and nighttime NEE to fit
+    temperature response curves.
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
     license
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Imports: 
+    beepr,
+    brms,
+    cmdstanr (>= 0.9.0),
+    dplyr,
+    ggplot2,
+    ggpubr,
+    lubridate,
+    tidybayes
+Remotes: 
+    stan-dev/cmdstanr
