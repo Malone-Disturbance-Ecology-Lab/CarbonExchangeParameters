@@ -16,7 +16,7 @@
 #' Equation # 8 in the paper (reference).
 #'
 #' @details
-#' Model parameters Are fit using the R package `brms`.
+#' Model parameters are fit using the R package `brms`.
 #'
 #' Rhat (Potential Scale Reduction Factor):
 #' Indicates how well the different Markov chains in your analysis have converged to the same posterior distribution.
@@ -132,7 +132,7 @@ LRC_PARMS_03 <- function(data.frame = NULL,
 
     samples <- data.frame %>% filter(YearMon == i) %>% dplyr::select(nee) %>% stats::na.omit() %>% base::nrow()
 
-    baseline <- base::as.Date(paste(i, '-01', sep = "")) %>% lubridate::days_in_month()*48 %>% base::as.numeric()
+    baseline <- base::as.Date(base::paste(i, '-01', sep = "")) %>% lubridate::days_in_month()*48 %>% base::as.numeric()
 
 
     base::try(results <- data.frame(idx = i,

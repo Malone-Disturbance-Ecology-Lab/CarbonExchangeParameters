@@ -53,7 +53,7 @@ Reference: https://link.springer.com/article/10.1007/s12010-015-1543-0.
 Equation # 8 in the paper (reference).
 }
 \details{
-Model parameters Are fit using the R package \code{brms}.
+Model parameters are fit using the R package \code{brms}.
 
 Rhat (Potential Scale Reduction Factor):
 Indicates how well the different Markov chains in your analysis have converged to the same posterior distribution.

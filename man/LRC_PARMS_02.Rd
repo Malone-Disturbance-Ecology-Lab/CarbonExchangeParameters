@@ -51,7 +51,7 @@ and \eqn{a_x} is the maximum CO2 uptake rate on the ecosystem scale.
 The equation requires photosynthetically active radiation, PAR, in 𝜇mol m-2 s-1 and net ecosystem exchange, NEE, in 𝜇mol m-2 s-1.
 }
 \details{
-Model parameters Are fit using the R package \code{brms}.
+Model parameters are fit using the R package \code{brms}.
 
 Rhat (Potential Scale Reduction Factor):
 Indicates how well the different Markov chains in your analysis have converged to the same posterior distribution.
