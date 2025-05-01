@@ -34,10 +34,10 @@
 #' @param priors.lrc (brmsprior dataframe) The priors for `brms::brm()` to use.
 #' Default priors are as follows:
 #' ```
-#' brms::prior(normal(-0.01, 0.1), nlpar = "a1", lb=-0.2, ub= 0) +
-#' brms::prior(normal( -7.65 ,  0.33), nlpar = "ax", lb=-30, ub= -5) +
-#' brms::prior(normal(2.10, 0.11), nlpar = "r", lb=1.9, ub= 2.2)+
-#' brms::prior(normal(25, 25), nlpar = "theta", lb=0, ub= 3)
+#' brms::prior(normal(-0.01, 0.1), nlpar = "a1", lb = -0.2, ub = 0) +
+#' brms::prior(normal(-7.65, 0.33), nlpar = "ax", lb = -30, ub = -5) +
+#' brms::prior(normal(2.10, 0.11), nlpar = "r", lb = 1.9, ub = 2.2)+
+#' brms::prior(normal(25, 25), nlpar = "theta", lb = 0, ub = 3)
 #' ```
 #' @param idx.colname (character) The name of the column containing the index.
 #' @param NEE.colname (character) The name of the column containing NEE.
@@ -73,17 +73,16 @@ LRC_PARMS_02 <- function(data.frame = NULL,
 
   if(c("idx") %in% base::names(df)) {
     base::print("GREAT JOB! your dataframe contains idx")
-  } else{base::print("The dataframe must include: idx, nee, and PAR")}
+  } else {base::print("The dataframe must include: idx, nee, and PAR")}
 
   if(c("nee") %in% base::names(df)) {
     print("YIPEE! your dataframe contains nee")
-  }  else{base::print("The dataframe must include: idx, nee, and PAR")}
+  } else {base::print("The dataframe must include: idx, nee, and PAR")}
 
   if(c("PAR") %in% base::names(df)) {
     print("Hooray! your dataframe contains PAR")
-  } else{base::print("The dataframe must include: idx, nee, and PAR")}
+  } else {base::print("The dataframe must include: idx, nee, and PAR")}
 
-  # PARM Dataframe:
   # PARM Dataframe:
   parms <- base::data.frame(idx = base::as.character(),
                             a1.mean = base::as.numeric(),
@@ -129,9 +128,9 @@ LRC_PARMS_02 <- function(data.frame = NULL,
 
     base::print(model.brms)
 
-    base::try(model.brms.df <- summary(model.brms)$fixed , silent = T)
+    base::try(model.brms.df <- summary(model.brms)$fixed, silent = T)
     base::try(model.brms.df.a1 <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'a1_Intercept'), silent = F)
-    base::try( model.brms.df.ax <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'ax_Intercept'), silent = F)
+    base::try(model.brms.df.ax <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'ax_Intercept'), silent = F)
     base::try(model.brms.df.r <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'r_Intercept'), silent = F)
     base::try(model.brms.df.theta <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'theta_Intercept'), silent = F)
 
