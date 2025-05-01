@@ -81,31 +81,31 @@ LRC_PARMS_05 <- function(data.frame = NULL,
   } else {base::print("The dataframe must include: idx, nee, and PAR")}
 
   # PARM Dataframe:
-  parms <- data.frame(idx = base::as.character(),
-                      a.mean = base::as.numeric(),
-                      a.se = base::as.numeric(),
-                      a.Bulk_ESS = base::as.numeric(),
-                      a.Tail_ESS = base::as.numeric(),
-                      a.Rhat = base::as.numeric(),
+  parms <- base::data.frame(idx = base::as.character(),
+                            a.mean = base::as.numeric(),
+                            a.se = base::as.numeric(),
+                            a.Bulk_ESS = base::as.numeric(),
+                            a.Tail_ESS = base::as.numeric(),
+                            a.Rhat = base::as.numeric(),
 
-                      B.mean = base::as.numeric(),
-                      B.se = base::as.numeric(),
-                      B.Bulk_ESS = base::as.numeric(),
-                      B.Tail_ESS = base::as.numeric(),
-                      B.Rhat = base::as.numeric(),
+                            B.mean = base::as.numeric(),
+                            B.se = base::as.numeric(),
+                            B.Bulk_ESS = base::as.numeric(),
+                            B.Tail_ESS = base::as.numeric(),
+                            B.Rhat = base::as.numeric(),
 
-                      Y.mean = base::as.numeric(),
-                      Y.se = base::as.numeric(),
-                      Y.Bulk_ESS = base::as.numeric(),
-                      Y.Tail_ESS = base::as.numeric(),
-                      Y.Rhat = base::as.numeric(),
+                            Y.mean = base::as.numeric(),
+                            Y.se = base::as.numeric(),
+                            Y.Bulk_ESS = base::as.numeric(),
+                            Y.Tail_ESS = base::as.numeric(),
+                            Y.Rhat = base::as.numeric(),
 
-                      Z.mean = base::as.numeric(),
-                      Z.se = base::as.numeric(),
-                      Z.Bulk_ESS = base::as.numeric(),
-                      Z.Tail_ESS = base::as.numeric(),
-                      Z.Rhat = base::as.numeric(),
-                      samples = base::as.numeric())
+                            Z.mean = base::as.numeric(),
+                            Z.se = base::as.numeric(),
+                            Z.Bulk_ESS = base::as.numeric(),
+                            Z.Tail_ESS = base::as.numeric(),
+                            Z.Rhat = base::as.numeric(),
+                            samples = base::as.numeric())
 
   base::message(" Your dataframe looks good and you are now ready to start fitting models")
 
@@ -119,7 +119,7 @@ LRC_PARMS_05 <- function(data.frame = NULL,
     #priors <- get_prior(bf(equation, a1+ax+r ~ 1, nl=TRUE),data = df %>% filter(PAR > 0), family = poisson())
 
     base::try(model.brms <- brms::brm(brms::bf(equation, a+B+Y+Z ~ 1, nl = TRUE),
-                                      prior = priors , data = df, iter = iterations, cores = 3, chains = 1, backend = "cmdstanr"), silent = F)
+                                      prior = priors.lrc, data = df, iter = iterations, cores = 3, chains = 1, backend = "cmdstanr"), silent = F)
 
     base::print(model.brms)
 
@@ -134,31 +134,31 @@ LRC_PARMS_05 <- function(data.frame = NULL,
     baseline <- base::as.Date(base::paste(i, '-01', sep = "")) %>% lubridate::days_in_month()*48 %>% base::as.numeric()
 
 
-    base::try(results <- data.frame(idx = i,
-                                    a.mean = model.brms.df.a$Estimate,
-                                    a.se = model.brms.df.a$Est.Error,
-                                    a.Bulk_ESS = model.brms.df.a$Bulk_ESS,
-                                    a.Tail_ESS = model.brms.df.a$Tail_ESS,
-                                    a.Rhat = model.brms.df.a$Rhat,
+    base::try(results <- base::data.frame(idx = i,
+                                          a.mean = model.brms.df.a$Estimate,
+                                          a.se = model.brms.df.a$Est.Error,
+                                          a.Bulk_ESS = model.brms.df.a$Bulk_ESS,
+                                          a.Tail_ESS = model.brms.df.a$Tail_ESS,
+                                          a.Rhat = model.brms.df.a$Rhat,
 
-                                    B.mean = model.brms.df.B$Estimate,
-                                    B.se = model.brms.df.B$Est.Error,
-                                    B.Bulk_ESS = model.brms.df.B$Bulk_ESS,
-                                    B.Tail_ESS = model.brms.df.B$Tail_ESS,
-                                    B.Rhat = model.brms.df.B$Rhat,
+                                          B.mean = model.brms.df.B$Estimate,
+                                          B.se = model.brms.df.B$Est.Error,
+                                          B.Bulk_ESS = model.brms.df.B$Bulk_ESS,
+                                          B.Tail_ESS = model.brms.df.B$Tail_ESS,
+                                          B.Rhat = model.brms.df.B$Rhat,
 
-                                    Y.mean = model.brms.df.Y$Estimate,
-                                    Y.se = model.brms.df.Y$Est.Error,
-                                    Y.Bulk_ESS = model.brms.df.Y$Bulk_ESS,
-                                    Y.Tail_ESS = model.brms.df.Y$Tail_ESS,
-                                    Y.Rhat = model.brms.df.Y$Rhat,
+                                          Y.mean = model.brms.df.Y$Estimate,
+                                          Y.se = model.brms.df.Y$Est.Error,
+                                          Y.Bulk_ESS = model.brms.df.Y$Bulk_ESS,
+                                          Y.Tail_ESS = model.brms.df.Y$Tail_ESS,
+                                          Y.Rhat = model.brms.df.Y$Rhat,
 
-                                    Z.mean = model.brms.df.Z$Estimate,
-                                    Z.se = model.brms.df.Z$Est.Error,
-                                    Z.Bulk_ESS = model.brms.df.Z$Bulk_ESS,
-                                    Z.Tail_ESS = model.brms.df.Z$Tail_ESS,
-                                    Z.Rhat = model.brms.df.Z$Rhat,
-                                    samples= samples/baseline*100), silent = T)
+                                          Z.mean = model.brms.df.Z$Estimate,
+                                          Z.se = model.brms.df.Z$Est.Error,
+                                          Z.Bulk_ESS = model.brms.df.Z$Bulk_ESS,
+                                          Z.Tail_ESS = model.brms.df.Z$Tail_ESS,
+                                          Z.Rhat = model.brms.df.Z$Rhat,
+                                          samples= samples/baseline*100), silent = T)
 
     base::message('YOU DID IT!')
     base::print(results)
