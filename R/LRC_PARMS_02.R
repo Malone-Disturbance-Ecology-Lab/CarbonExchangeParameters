@@ -1,8 +1,8 @@
-#' @title Fit a Light Response Curves (LRC) by an index to get a parameter file
+#' @title Fit a Light Response Curve (LRC) by an index to get a parameter file
 #'
 #' @description
 #' This function uses the equation:
-#' \deqn{\text{NEE} \sim \frac{a_1 \cdot \text{PAR} + a_{\text{x}} - \sqrt{(a_1 \cdot \text{PAR} + a_{\text{x}})^2 - 4 \cdot \text{PAR} \cdot a_1 \cdot a_{\text{x}}}}{2 \cdot \Theta} - r}
+#' \deqn{\text{NEE} \sim \frac{a_1 \cdot \text{PAR} + a_x - \sqrt{(a_1 \cdot \text{PAR} + a_x)^2 - 4 \cdot \text{PAR} \cdot a_1 \cdot a_x}}{2 \cdot \Theta} - r}
 #'
 #' Where \eqn{r} is ecosystem respiration (𝜇mol CO2 m-2 s-1),
 #' \eqn{a_1} is the apparent quantum efficiency of CO2 uptake (CO2),

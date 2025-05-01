@@ -2,7 +2,7 @@
 % Please edit documentation in R/LRC_PARMS_03.R
 \name{LRC_PARMS_03}
 \alias{LRC_PARMS_03}
-\title{Fit a Light Response Curves (LRC) by an index to get a parameter file}
+\title{Fit a Light Response Curve (LRC) by an index to get a parameter file}
 \usage{
 LRC_PARMS_03(
   data.frame = NULL,
@@ -23,9 +23,9 @@ LRC_PARMS_03(
 \item{priors.lrc}{(brmsprior dataframe) The priors for \code{brms::brm()} to use.
 Default priors are as follows:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{prior(normal(-9.9, 0.4), nlpar = "ax", lb = -15, ub = 1) +
-prior(normal(-0.05, 0.1), nlpar = "a1", lb = -0.2, ub = 0.5) +
-prior(normal(1.2, 0.11), nlpar = "r", lb = 1.0, ub = 3.2)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{brms::prior(normal(-9.9, 0.4), nlpar = "ax", lb = -15, ub = 1) +
+brms::prior(normal(-0.05, 0.1), nlpar = "a1", lb = -0.2, ub = 0.5) +
+brms::prior(normal(1.2, 0.11), nlpar = "r", lb = 1.0, ub = 3.2)
 }\if{html}{\out{</div>}}}
 
 \item{idx.colname}{(character) The name of the column containing the index.}
@@ -39,7 +39,7 @@ prior(normal(1.2, 0.11), nlpar = "r", lb = 1.0, ub = 3.2)
 }
 \description{
 This function uses the equation:
-\deqn{\text{NEE} \sim a_x \left( 1 - \exp \left( -\frac{a_1 \cdot \text{PAR}}{a_{\text{x}}} \right) \right) - r}
+\deqn{\text{NEE} \sim a_x \left( 1 - \exp \left( -\frac{a_1 \cdot \text{PAR}}{a_x} \right) \right) - r}
 
 Where NEE is net ecosystem exchange in 𝜇mol m-2 s-1,
 \eqn{a_x} is light-saturated net photosynthetic rate,
@@ -53,7 +53,7 @@ Reference: https://link.springer.com/article/10.1007/s12010-015-1543-0.
 Equation # 8 in the paper (reference).
 }
 \details{
-Model parameters Are fit using the R package brms.
+Model parameters Are fit using the R package \code{brms}.
 
 Rhat (Potential Scale Reduction Factor):
 Indicates how well the different Markov chains in your analysis have converged to the same posterior distribution.

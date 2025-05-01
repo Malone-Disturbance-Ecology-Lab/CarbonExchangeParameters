@@ -1,4 +1,4 @@
-#' @title Fit a Light Response Curves (LRC) by an index to get a parameter file
+#' @title Fit a Light Response Curve (LRC) by an index to get a parameter file
 #'
 #' @description
 #' This function uses the equation:

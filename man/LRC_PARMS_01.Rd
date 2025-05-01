@@ -2,7 +2,7 @@
 % Please edit documentation in R/LRC_PARMS_01.R
 \name{LRC_PARMS_01}
 \alias{LRC_PARMS_01}
-\title{Fit a Light Response Curves (LRC) by an index to get a parameter file}
+\title{Fit a Light Response Curve (LRC) by an index to get a parameter file}
 \usage{
 LRC_PARMS_01(
   data.frame = NULL,
