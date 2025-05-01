@@ -84,31 +84,31 @@ LRC_PARMS_04 <- function(data.frame = NULL,
   } else {base::print("The dataframe must include: idx, nee, and PAR")}
 
   # PARM Dataframe:
-  parms <- data.frame(idx = base::as.character(),
-                      a1.mean = base::as.numeric(),
-                      a1.se = base::as.numeric(),
-                      a1.Bulk_ESS = base::as.numeric(),
-                      a1.Tail_ESS = base::as.numeric(),
-                      a1.Rhat = base::as.numeric(),
+  parms <- base::data.frame(idx = base::as.character(),
+                            a1.mean = base::as.numeric(),
+                            a1.se = base::as.numeric(),
+                            a1.Bulk_ESS = base::as.numeric(),
+                            a1.Tail_ESS = base::as.numeric(),
+                            a1.Rhat = base::as.numeric(),
 
-                      ax.mean = base::as.numeric(),
-                      ax.se = base::as.numeric(),
-                      ax.Bulk_ESS = base::as.numeric(),
-                      ax.Tail_ESS = base::as.numeric(),
-                      ax.Rhat = base::as.numeric(),
+                            ax.mean = base::as.numeric(),
+                            ax.se = base::as.numeric(),
+                            ax.Bulk_ESS = base::as.numeric(),
+                            ax.Tail_ESS = base::as.numeric(),
+                            ax.Rhat = base::as.numeric(),
 
-                      r.mean = base::as.numeric(),
-                      r.se = base::as.numeric(),
-                      r.Bulk_ESS = base::as.numeric(),
-                      r.Tail_ESS = base::as.numeric(),
-                      r.Rhat = base::as.numeric(),
-                      samples = base::as.numeric(),
+                            r.mean = base::as.numeric(),
+                            r.se = base::as.numeric(),
+                            r.Bulk_ESS = base::as.numeric(),
+                            r.Tail_ESS = base::as.numeric(),
+                            r.Rhat = base::as.numeric(),
+                            samples = base::as.numeric(),
 
-                      b.mean = base::as.numeric(),
-                      b.se = base::as.numeric(),
-                      b.Bulk_ESS = base::as.numeric(),
-                      b.Tail_ESS = base::as.numeric(),
-                      b.Rhat = base::as.numeric()
+                            b.mean = base::as.numeric(),
+                            b.se = base::as.numeric(),
+                            b.Bulk_ESS = base::as.numeric(),
+                            b.Tail_ESS = base::as.numeric(),
+                            b.Rhat = base::as.numeric()
   )
 
 
@@ -139,32 +139,32 @@ LRC_PARMS_04 <- function(data.frame = NULL,
     baseline <- base::as.Date(base::paste(i, '-01', sep = "")) %>% lubridate::days_in_month()*48 %>% base::as.numeric()
 
 
-    base::try(results <- data.frame(idx = i,
-                                    a1.mean = model.brms.df.a1$Estimate,
-                                    a1.se = model.brms.df.a1$Est.Error,
-                                    a1.Bulk_ESS = model.brms.df.a1$Bulk_ESS,
-                                    a1.Tail_ESS = model.brms.df.a1$Tail_ESS,
-                                    a1.Rhat = model.brms.df.a1$Rhat,
+    base::try(results <- base::data.frame(idx = i,
+                                          a1.mean = model.brms.df.a1$Estimate,
+                                          a1.se = model.brms.df.a1$Est.Error,
+                                          a1.Bulk_ESS = model.brms.df.a1$Bulk_ESS,
+                                          a1.Tail_ESS = model.brms.df.a1$Tail_ESS,
+                                          a1.Rhat = model.brms.df.a1$Rhat,
 
-                                    ax.mean = model.brms.df.ax$Estimate,
-                                    ax.se = model.brms.df.ax$Est.Error,
-                                    ax.Bulk_ESS = model.brms.df.ax$Bulk_ESS,
-                                    ax.Tail_ESS = model.brms.df.ax$Tail_ESS,
-                                    ax.Rhat = model.brms.df.ax$Rhat,
+                                          ax.mean = model.brms.df.ax$Estimate,
+                                          ax.se = model.brms.df.ax$Est.Error,
+                                          ax.Bulk_ESS = model.brms.df.ax$Bulk_ESS,
+                                          ax.Tail_ESS = model.brms.df.ax$Tail_ESS,
+                                          ax.Rhat = model.brms.df.ax$Rhat,
 
-                                    r.mean = model.brms.df.r$Estimate,
-                                    r.se = model.brms.df.r$Est.Error,
-                                    r.Bulk_ESS = model.brms.df.r$Bulk_ESS,
-                                    r.Tail_ESS = model.brms.df.r$Tail_ESS,
-                                    r.Rhat = model.brms.df.r$Rhat,
+                                          r.mean = model.brms.df.r$Estimate,
+                                          r.se = model.brms.df.r$Est.Error,
+                                          r.Bulk_ESS = model.brms.df.r$Bulk_ESS,
+                                          r.Tail_ESS = model.brms.df.r$Tail_ESS,
+                                          r.Rhat = model.brms.df.r$Rhat,
 
-                                    b.mean = model.brms.df.r$Estimate,
-                                    b.se = model.brms.df.r$Est.Error,
-                                    b.Bulk_ESS = model.brms.df.r$Bulk_ESS,
-                                    b.Tail_ESS = model.brms.df.r$Tail_ESS,
-                                    b.Rhat = model.brms.df.r$Rhat,
+                                          b.mean = model.brms.df.r$Estimate,
+                                          b.se = model.brms.df.r$Est.Error,
+                                          b.Bulk_ESS = model.brms.df.r$Bulk_ESS,
+                                          b.Tail_ESS = model.brms.df.r$Tail_ESS,
+                                          b.Rhat = model.brms.df.r$Rhat,
 
-                                    samples = samples/baseline*100), silent = T)
+                                          samples = samples/baseline*100), silent = T)
 
     base::message('YOU DID IT!')
 
