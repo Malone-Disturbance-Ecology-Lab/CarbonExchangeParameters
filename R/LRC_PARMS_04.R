@@ -64,8 +64,8 @@ LRC_PARMS_04 <- function(data.frame = NULL,
   data.frame$PAR <- data.frame[,PAR.colname]
 
   df <- data.frame %>% dplyr::select(idx,
-                              nee,
-                              PAR)
+                                     nee,
+                                     PAR)
 
   equation <- nee ~ a1 * ( (1-b*PAR) / (1+(a1/ax)*PAR) ) - r
 
@@ -124,7 +124,7 @@ LRC_PARMS_04 <- function(data.frame = NULL,
     #priors <- get_prior(bf(equation, a1+ax+r ~ 1, nl=TRUE),data = df %>% filter(PAR > 0), family = poisson())
 
     base::try(model.brms <- brms::brm(brms::bf(equation, a1+ax+r+b ~ 1, nl = TRUE),
-                           prior = priors.lrc, data = df, iter = iterations, cores = 3, chains = 1, backend = "cmdstanr"), silent = F)
+                                      prior = priors.lrc, data = df, iter = iterations, cores = 3, chains = 1, backend = "cmdstanr"), silent = F)
 
     base::print(model.brms)
 
@@ -140,31 +140,31 @@ LRC_PARMS_04 <- function(data.frame = NULL,
 
 
     base::try(results <- data.frame(idx = i,
-                               a1.mean = model.brms.df.a1$Estimate,
-                               a1.se = model.brms.df.a1$Est.Error,
-                               a1.Bulk_ESS = model.brms.df.a1$Bulk_ESS,
-                               a1.Tail_ESS = model.brms.df.a1$Tail_ESS,
-                               a1.Rhat = model.brms.df.a1$Rhat,
+                                    a1.mean = model.brms.df.a1$Estimate,
+                                    a1.se = model.brms.df.a1$Est.Error,
+                                    a1.Bulk_ESS = model.brms.df.a1$Bulk_ESS,
+                                    a1.Tail_ESS = model.brms.df.a1$Tail_ESS,
+                                    a1.Rhat = model.brms.df.a1$Rhat,
 
-                               ax.mean = model.brms.df.ax$Estimate,
-                               ax.se = model.brms.df.ax$Est.Error,
-                               ax.Bulk_ESS = model.brms.df.ax$Bulk_ESS,
-                               ax.Tail_ESS = model.brms.df.ax$Tail_ESS,
-                               ax.Rhat = model.brms.df.ax$Rhat,
+                                    ax.mean = model.brms.df.ax$Estimate,
+                                    ax.se = model.brms.df.ax$Est.Error,
+                                    ax.Bulk_ESS = model.brms.df.ax$Bulk_ESS,
+                                    ax.Tail_ESS = model.brms.df.ax$Tail_ESS,
+                                    ax.Rhat = model.brms.df.ax$Rhat,
 
-                               r.mean = model.brms.df.r$Estimate,
-                               r.se = model.brms.df.r$Est.Error,
-                               r.Bulk_ESS = model.brms.df.r$Bulk_ESS,
-                               r.Tail_ESS = model.brms.df.r$Tail_ESS,
-                               r.Rhat = model.brms.df.r$Rhat,
+                                    r.mean = model.brms.df.r$Estimate,
+                                    r.se = model.brms.df.r$Est.Error,
+                                    r.Bulk_ESS = model.brms.df.r$Bulk_ESS,
+                                    r.Tail_ESS = model.brms.df.r$Tail_ESS,
+                                    r.Rhat = model.brms.df.r$Rhat,
 
-                               b.mean = model.brms.df.r$Estimate,
-                               b.se = model.brms.df.r$Est.Error,
-                               b.Bulk_ESS = model.brms.df.r$Bulk_ESS,
-                               b.Tail_ESS = model.brms.df.r$Tail_ESS,
-                               b.Rhat = model.brms.df.r$Rhat,
+                                    b.mean = model.brms.df.r$Estimate,
+                                    b.se = model.brms.df.r$Est.Error,
+                                    b.Bulk_ESS = model.brms.df.r$Bulk_ESS,
+                                    b.Tail_ESS = model.brms.df.r$Tail_ESS,
+                                    b.Rhat = model.brms.df.r$Rhat,
 
-                               samples = samples/baseline*100), silent = T)
+                                    samples = samples/baseline*100), silent = T)
 
     base::message('YOU DID IT!')
 
@@ -172,11 +172,9 @@ LRC_PARMS_04 <- function(data.frame = NULL,
 
     base::try(parms <- parms %>% base::rbind(results), silent = T)
 
-    message('Just keep swimming')
+    base::message('Just keep swimming')
   }
 
   return(parms)
 }
 # EOF
-
-
