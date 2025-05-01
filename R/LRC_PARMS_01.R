@@ -125,7 +125,7 @@ LRC_PARMS_01 <- function(data.frame = NULL,
 
     samples <- df.sub %>% dplyr::filter(idx == i) %>% dplyr::select(nee) %>% stats::na.omit() %>% base::nrow()
 
-    baseline <- base::as.Date(paste(i, '-01', sep = "")) %>% lubridate::days_in_month()*48 %>% base::as.numeric()
+    baseline <- base::as.Date(base::paste(i, '-01', sep = "")) %>% lubridate::days_in_month()*48 %>% base::as.numeric()
 
 
     base::try(results <- base::data.frame(idx = i,
@@ -146,15 +146,15 @@ LRC_PARMS_01 <- function(data.frame = NULL,
                                           r.Bulk_ESS = model.brms.df.r$Bulk_ESS,
                                           r.Tail_ESS = model.brms.df.r$Tail_ESS,
                                           r.Rhat = model.brms.df.r$Rhat,
-                                          samples = samples/baseline *100 ), silent = T)
+                                          samples = samples/baseline *100), silent = T)
 
-    base::message( 'YOU DID IT!')
+    base::message('YOU DID IT!')
 
     base::print(results)
 
     base::try(parms <- parms %>% base::rbind(results), silent = T)
 
-    base::message( 'Just keep swimming')
+    base::message('Just keep swimming')
   }
 
   return(parms)
