@@ -41,7 +41,7 @@ brms::prior(normal(.3, .2), nlpar = "b", lb = 0, ub= 3)
 }
 \description{
 This function uses the equation:
-\deqn{\text{NEE} \sim a_1 \left(\frac{1-b \cdot \text{PAR}}{1 + \frac{a_1}{a_x} \cdot \text{PAR}} \right) - r}
+\deqn{\text{NEE} \sim a_1 \left(\frac{1-b \cdot \text{PAR}}{1 + \frac{a_1}{a_x} \cdot \text{PAR}} \right) \cdot \text{PAR} - r}
 
 Where \eqn{r} is ecosystem respiration (𝜇mol CO2 m-2 s-1),
 \eqn{a_1} is the apparent quantum efficiency of CO2 uptake (CO2),
