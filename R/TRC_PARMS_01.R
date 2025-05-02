@@ -4,7 +4,7 @@
 #' This function uses the equation:
 #' \deqn{\text{NEE} \sim r_b \cdot \exp \left( E_0 \left( \left( \frac{1}{T_{\text{ref}}} - T_0 \right) - \left( \frac{1}{T_{\text{air}}} - T_0 \right) \right) \right)}
 #'
-#' The equation requires air temperature \eqn{T_{\text{air}}} in degrees Celsius, photosynthetically active radiation (PAR) in 𝜇mol m-2 s-1, and net ecosystem exchange (NEE) in 𝜇mol m-2 s-1.
+#' The equation requires air temperature (TA) in degrees Celsius, photosynthetically active radiation (PAR) in 𝜇mol m-2 s-1, and net ecosystem exchange (NEE) in 𝜇mol m-2 s-1.
 #'
 #' @details
 #' Model parameters are fit using the R package `brms`.
@@ -24,7 +24,7 @@
 #' Key points to remember:
 #' Aim for Rhat close to 1 and high values for both Bulk ESS and Tail ESS.
 #'
-#' @param data.frame (dataframe) A dataframe that contains net ecosystem exchange (NEE), an index, air temperature (AT), and photosynthetically active radiation (PAR).
+#' @param data.frame (dataframe) A dataframe that contains net ecosystem exchange (NEE), an index, air temperature (TA), and photosynthetically active radiation (PAR).
 #' @param iterations (numeric) The number of iterations to run `brms::brm()`.
 #' @param priors.trc (brmsprior dataframe) The priors for `brms::brm()` to use.
 #' Default priors are as follows:
@@ -61,19 +61,19 @@ TRC_PARMS_01 <- function(data.frame = NULL,
 
   if(c("idx") %in% base::names(df)) {
     base::print("GREAT JOB! your dataframe contains idx")
-  } else {base::print("The dataframe must include: idx, Reco, PAR, and TA")}
+  } else {base::print("The dataframe must include: idx, nee, PAR, and TA")}
 
-  if(c("Reco") %in% base::names(df)) {
-    base::print("YIPEE! your dataframe contains Reco")
-  } else {base::print("The dataframe must include: idx, Reco, PAR, and TA")}
+  if(c("nee") %in% base::names(df)) {
+    base::print("YIPEE! your dataframe contains nee")
+  } else {base::print("The dataframe must include: idx, nee, PAR, and TA")}
 
   if(c("PAR") %in% base::names(df)) {
     base::print("Hooray! your dataframe contains PAR")
-  } else {base::print("The dataframe must include: idx, Reco, PAR, and TA")}
+  } else {base::print("The dataframe must include: idx, nee, PAR, and TA")}
 
   if(c("TA") %in% base::names(df)) {
     base::print("Hooray! your dataframe contains TA")
-  } else {base::print("The dataframe must include: idx, Reco, PAR, and TA")}
+  } else {base::print("The dataframe must include: idx, nee, PAR, and TA")}
 
   base::try(equation <- NEE ~ Rref * exp(E0 * (1 / (10 + 46.02) - 1 / (TA + 46.02))), silent = T)
 

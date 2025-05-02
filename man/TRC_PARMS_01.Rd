@@ -16,7 +16,7 @@ TRC_PARMS_01(
 )
 }
 \arguments{
-\item{data.frame}{(dataframe) A dataframe that contains net ecosystem exchange (NEE), an index, air temperature (AT), and photosynthetically active radiation (PAR).}
+\item{data.frame}{(dataframe) A dataframe that contains net ecosystem exchange (NEE), an index, air temperature (TA), and photosynthetically active radiation (PAR).}
 
 \item{iterations}{(numeric) The number of iterations to run \code{brms::brm()}.}
 
@@ -42,7 +42,7 @@ brms::prior(normal(1.0, 0.3), nlpar = "Rref", lb = 0.01, ub = 1)
 This function uses the equation:
 \deqn{\text{NEE} \sim r_b \cdot \exp \left( E_0 \left( \left( \frac{1}{T_{\text{ref}}} - T_0 \right) - \left( \frac{1}{T_{\text{air}}} - T_0 \right) \right) \right)}
 
-The equation requires air temperature \eqn{T_{\text{air}}} in degrees Celsius, photosynthetically active radiation (PAR) in 𝜇mol m-2 s-1, and net ecosystem exchange (NEE) in 𝜇mol m-2 s-1.
+The equation requires air temperature (TA) in degrees Celsius, photosynthetically active radiation (PAR) in 𝜇mol m-2 s-1, and net ecosystem exchange (NEE) in 𝜇mol m-2 s-1.
 }
 \details{
 Model parameters are fit using the R package \code{brms}.
