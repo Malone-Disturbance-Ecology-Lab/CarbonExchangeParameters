@@ -39,9 +39,9 @@
 #' brms::prior(normal(0.2, 0.1), nlpar = "Y", lb = 0, ub = 0.3) +
 #' brms::prior(normal(0.0, 0.1), nlpar = "Z", lb = -0.1, ub = 0.2)
 #' ```
-#' @param idx.colname (character) The name of the column containing the index.
-#' @param NEE.colname (character) The name of the column containing NEE.
-#' @param PAR.colname (character) The name of the column containing PAR.
+#' @param idx (character) The name of the column containing the index.
+#' @param nee (character) The name of the column containing NEE.
+#' @param PAR (character) The name of the column containing PAR.
 #'
 #' @returns (dataframe) Dataframe of parameter values by the index used to fit them.
 #' @export

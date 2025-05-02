@@ -30,11 +30,11 @@ brms::prior(normal(0.2, 0.1), nlpar = "Y", lb = 0, ub = 0.3) +
 brms::prior(normal(0.0, 0.1), nlpar = "Z", lb = -0.1, ub = 0.2)
 }\if{html}{\out{</div>}}}
 
-\item{idx.colname}{(character) The name of the column containing the index.}
+\item{idx}{(character) The name of the column containing the index.}
 
-\item{NEE.colname}{(character) The name of the column containing NEE.}
+\item{nee}{(character) The name of the column containing NEE.}
 
-\item{PAR.colname}{(character) The name of the column containing PAR.}
+\item{PAR}{(character) The name of the column containing PAR.}
 }
 \value{
 (dataframe) Dataframe of parameter values by the index used to fit them.
