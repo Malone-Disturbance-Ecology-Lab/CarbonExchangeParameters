@@ -67,7 +67,7 @@ LRC_PARMS_04 <- function(data.frame = NULL,
                                      nee,
                                      PAR)
 
-  equation <- nee ~ a1 * ( (1-b*PAR) / (1+(a1/ax)*PAR) )*PAR - r
+  equation <- nee ~ a1 * ((1-b*PAR) / (1+(a1/ax)*PAR))*PAR - r
 
 
 

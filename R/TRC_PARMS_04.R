@@ -76,7 +76,7 @@ TRC_PARMS_04 <- function(data.frame = NULL,
   if(c("TA") %in% base::names(df)) {
     base::print("Hooray! your dataframe contains TA")
   } else {base::print("The dataframe must include: idx, nee, TA, and PAR")}
-  base::try(equation <- nee ~ Rref * Q10 * exp((TA-10)/10) , silent = T)
+  base::try(equation <- nee ~ Rref * Q10 * exp((TA-10)/10), silent = T)
 
   # PARM Dataframe:
   base::try(parms <- base::data.frame(idx = base::as.character(),

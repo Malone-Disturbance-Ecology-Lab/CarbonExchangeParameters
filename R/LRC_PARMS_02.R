@@ -67,7 +67,7 @@ LRC_PARMS_02 <- function(data.frame = NULL,
                                      nee,
                                      PAR)
 
-  equation <- nee ~ ((a1 * PAR) + ax - sqrt((a1 * PAR + ax)^2 - 4 * (a1 * PAR * theta * ax))/(2 * theta))-r
+  equation <- nee ~ ((a1 * PAR) + ax - sqrt((a1 * PAR + ax)^2 - 4 * (a1 * PAR * theta * ax))/(2 * theta)) - r
 
 
 
