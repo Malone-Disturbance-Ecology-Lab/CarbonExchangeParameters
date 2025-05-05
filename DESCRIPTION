@@ -23,7 +23,7 @@ Authors@R: c(
   person(given = "Boya", family = "Zhang", 
          email = "boya.zhang@yale.edu",
          comment = c(ORCID = "0000-0002-6860-2054"),
-         role = "aut"),
+         role = "aut")
          )
 Description: Carbon flux partitioning functions that use daytime net ecosystem exchange (NEE)
     from tower sites to fit light response curves and nighttime NEE to fit
