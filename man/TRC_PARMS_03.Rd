@@ -45,10 +45,10 @@ This function uses the equation:
 \deqn{\text{NEE} \sim a \left( T - T_{\text{opt}} \right)^2 + E_{\text{Rmax}}}
 
 Where
-a = a parameter estimate of the fitted quadratic function,
-T = temperature in Celsius,
-Topt = optimum temperature, a parameter, vertex of the parabola,
-and ERmax = maximum respiration, a parameter, vertex of the parabola.
+\eqn{a} = a parameter estimate of the fitted quadratic function,
+\eqn{T} = temperature in Celsius,
+\eqn{T_{opt}} = optimum temperature, a parameter, vertex of the parabola,
+and \eqn{E_{Rmax}} = maximum respiration, a parameter, vertex of the parabola.
 
 Reference: https://www.nature.com/articles/s41559-023-02121-w#Equ1
 
