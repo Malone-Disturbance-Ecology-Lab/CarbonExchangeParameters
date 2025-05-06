@@ -52,6 +52,9 @@ TRC_PARMS_04 <- function(data.frame = NULL,
                          TA.colname = NULL,
                          PAR.colname = NULL){
 
+  # Squelch visible bindings note
+  nee <- idx <- TA <- PAR <- NULL
+
   data.frame$nee <- data.frame[,NEE.colname]
   data.frame$idx <- data.frame[,idx.colname]
   data.frame$TA <- data.frame[,TA.colname]

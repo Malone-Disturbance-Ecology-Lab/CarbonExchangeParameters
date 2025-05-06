@@ -59,6 +59,9 @@ LRC_PARMS_02 <- function(data.frame = NULL,
                          NEE.colname = NULL,
                          PAR.colname = NULL){
 
+  # Squelch visible bindings note
+  nee <- idx <- PAR <- NULL
+
   data.frame$nee <- data.frame[,NEE.colname]
   data.frame$idx <- data.frame[,idx.colname]
   data.frame$PAR <- data.frame[,PAR.colname]
@@ -114,7 +117,7 @@ LRC_PARMS_02 <- function(data.frame = NULL,
 
   base::message("Your dataframe looks good and you are now ready to start fitting models")
 
-  for ( i in base::unique(df$idx)){
+  for (i in base::unique(df$idx)){
     base::print(i)
 
     # Subset the file:

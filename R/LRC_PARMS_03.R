@@ -61,6 +61,9 @@ LRC_PARMS_03 <- function(data.frame = NULL,
                          NEE.colname = NULL,
                          PAR.colname = NULL){
 
+  # Squelch visible bindings note
+  nee <- idx <- PAR <- NULL
+
   data.frame$nee <- data.frame[,NEE.colname]
   data.frame$idx <- data.frame[,idx.colname]
   data.frame$PAR <- data.frame[,PAR.colname]
@@ -126,11 +129,11 @@ LRC_PARMS_03 <- function(data.frame = NULL,
     stats::print(model.brms)
 
     stats::try(model.brms.df <- summary(model.brms)$fixed, silent = T)
-    stats::try(model.brms.df.ax <- model.brms.df %>% filter(base::row.names(model.brms.df) == 'ax_Intercept'), silent = F)
-    stats::try(model.brms.df.a1 <- model.brms.df %>% filter(base::row.names(model.brms.df) == 'a1_Intercept'), silent = F)
-    stats::try(model.brms.df.r <- model.brms.df %>% filter(base::row.names(model.brms.df) == 'r_Intercept'), silent = F)
+    stats::try(model.brms.df.ax <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'ax_Intercept'), silent = F)
+    stats::try(model.brms.df.a1 <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'a1_Intercept'), silent = F)
+    stats::try(model.brms.df.r <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'r_Intercept'), silent = F)
 
-    samples <- data.frame %>% filter(YearMon == i) %>% dplyr::select(nee) %>% stats::na.omit() %>% base::nrow()
+    samples <- data.frame %>% dplyr::filter(YearMon == i) %>% dplyr::select(nee) %>% stats::na.omit() %>% base::nrow()
 
     baseline <- base::as.Date(base::paste(i, '-01', sep = "")) %>% lubridate::days_in_month()*48 %>% base::as.numeric()
 

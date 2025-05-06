@@ -57,6 +57,9 @@ LRC_PARMS_06 <- function(data.frame = NULL,
                          NEE.colname = NULL,
                          PAR.colname = NULL){
 
+  # Squelch visible bindings note
+  nee <- idx <- PAR <- NULL
+
   data.frame$nee <- data.frame[,NEE.colname]
   data.frame$idx <- data.frame[,idx.colname]
   data.frame$PAR <- data.frame[,PAR.colname]
