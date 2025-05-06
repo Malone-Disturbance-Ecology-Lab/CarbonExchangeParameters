@@ -40,7 +40,7 @@ brms::prior(normal(1.0, 0.3), nlpar = "Rref", lb = 0.01, ub = 1)
 }
 \description{
 This function uses the equation:
-\deqn{\text{NEE} \sim r_b \cdot \exp \left( E_0 \left( \left( \frac{1}{T_{\text{ref}}} - T_0 \right) - \left( \frac{1}{T_{\text{air}}} - T_0 \right) \right) \right)}
+\deqn{\text{NEE} \sim r_b \cdot \exp \left( E_0 \left( \left( \frac{1}{T_{\text{ref}} - T_0} \right) - \left( \frac{1}{T_{\text{air}} - T_0} \right) \right) \right)}
 
 The equation requires air temperature (TA) in degrees Celsius, photosynthetically active radiation (PAR) in 𝜇mol m-2 s-1, and net ecosystem exchange (NEE) in 𝜇mol m-2 s-1.
 }
