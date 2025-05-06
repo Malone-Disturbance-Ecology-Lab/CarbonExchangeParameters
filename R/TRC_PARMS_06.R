@@ -46,6 +46,7 @@
 #' @param TA.colname (character) The name of the column containing air temperature.
 #'
 #' @returns (dataframe) Dataframe of parameter values by the index used to fit them.
+#' @importFrom magrittr %>%
 #' @export
 #'
 #' @examples

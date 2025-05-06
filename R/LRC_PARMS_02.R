@@ -44,6 +44,7 @@
 #' @param PAR.colname (character) The name of the column containing PAR.
 #'
 #' @returns (dataframe) Dataframe of parameter values by the index used to fit them.
+#' @importFrom magrittr %>%
 #' @export
 #'
 #' @examples
