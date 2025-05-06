@@ -40,6 +40,8 @@ Imports:
     ggplot2,
     ggpubr,
     lubridate,
+    magrittr,
+    stats,
     tidybayes
 Remotes: 
     stan-dev/cmdstanr
