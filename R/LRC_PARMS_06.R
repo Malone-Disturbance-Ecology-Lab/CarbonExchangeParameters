@@ -126,7 +126,7 @@ LRC_PARMS_06 <- function(data.frame = NULL,
     base::try(model.brms.df.alpha <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'alpha_Intercept'), silent = F)
     base::try(model.brms.df.Icomp <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'Icomp_Intercept'), silent = F)
 
-    samples <- data.frame %>% dplyr::filter(YearMon == i) %>% dplyr::select(nee) %>% stats::na.omit() %>% base::nrow()
+    samples <- df.sub %>% dplyr::filter(idx == i) %>% dplyr::select(nee) %>% stats::na.omit() %>% base::nrow()
 
     baseline <- base::as.Date(base::paste(i, '-01', sep = "")) %>% lubridate::days_in_month()*48 %>% base::as.numeric()
 

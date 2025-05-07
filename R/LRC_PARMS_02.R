@@ -138,7 +138,7 @@ LRC_PARMS_02 <- function(data.frame = NULL,
     base::try(model.brms.df.r <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'r_Intercept'), silent = F)
     base::try(model.brms.df.theta <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'theta_Intercept'), silent = F)
 
-    samples <- data.frame %>% dplyr::filter(YearMon == i) %>% dplyr::select(nee) %>% stats::na.omit() %>% base::nrow()
+    samples <- df.sub %>% dplyr::filter(idx == i) %>% dplyr::select(nee) %>% stats::na.omit() %>% base::nrow()
 
     baseline <- base::as.Date(base::paste(i, '-01', sep = "")) %>% lubridate::days_in_month()*48 %>% base::as.numeric()
 

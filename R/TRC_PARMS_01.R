@@ -121,7 +121,7 @@ TRC_PARMS_01 <- function(data.frame = NULL,
     model.brms.df.E0 <- model.brms.df %>% dplyr::filter(base::rownames(model.brms.df) == "E0_Intercept")
     model.brms.df.Rref <- model.brms.df %>% dplyr::filter(base::rownames(model.brms.df) == "Rref_Intercept")
 
-    base::try(samples <- data.frame %>% dplyr::filter(YearMon == i) %>% dplyr::select(nee) %>% stats::na.omit() %>% base::nrow(), silent = F)
+    base::try(samples <- df.sub %>% dplyr::filter(idx == i) %>% dplyr::select(nee) %>% stats::na.omit() %>% base::nrow(), silent = F)
     base::try(baseline <- base::as.Date(base::paste(i, '-01', sep = "")) %>% lubridate::days_in_month()*48 %>% base::as.numeric(), silent = F)
 
 
