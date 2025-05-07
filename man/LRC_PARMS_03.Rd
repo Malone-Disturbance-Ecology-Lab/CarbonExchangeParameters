@@ -44,7 +44,7 @@ This function uses the equation:
 Where NEE is net ecosystem exchange in \eqn{\mu}mol m-2 s-1,
 \eqn{a_x} is light-saturated net photosynthetic rate,
 \eqn{a_1} is the initial quantum efficiency or intrinsic quantum yield,
-PAR is Photosynthetically active radiation in mol m-2 s-1,
+PAR is Photosynthetically active radiation in \eqn{\mu}mol m-2 s-1,
 and \eqn{r} is dark respiration rate.
 
 The equation requires photosynthetically active radiation, PAR, in \eqn{\mu}mol m-2 s-1 and net ecosystem exchange, NEE, in \eqn{\mu}mol m-2 s-1.
