@@ -52,7 +52,7 @@ and \eqn{E_{Rmax}} = maximum respiration, a parameter, vertex of the parabola.
 
 Reference: https://www.nature.com/articles/s41559-023-02121-w#Equ1
 
-The equation requires air temperature (TA) in degrees Celsius, photosynthetically active radiation (PAR) in 𝜇mol m-2 s-1, and net ecosystem exchange (NEE) in 𝜇mol m-2 s-1.
+The equation requires air temperature (TA) in degrees Celsius, photosynthetically active radiation (PAR) in \eqn{\mu}mol m-2 s-1, and net ecosystem exchange (NEE) in \eqn{\mu}mol m-2 s-1.
 }
 \details{
 Model parameters are fit using the R package \code{brms}.

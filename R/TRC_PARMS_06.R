@@ -4,7 +4,7 @@
 #' This function uses the equation:
 #' \deqn{\text{NEE} \sim R_{\text{ref}} \cdot \exp \left( \frac{E_a}{R} \left( \frac{1}{T_{\text{ref}}} - \frac{1}{T} \right) \right) }
 #'
-#' Where \eqn{R_{ref}} is the reference respiration rate \[𝜇mol CO2 m-2 s-1\],
+#' Where \eqn{R_{ref}} is the reference respiration rate \[\eqn{\mu}mol CO2 m-2 s-1\],
 #' \eqn{E_a} is the activation energy \[J/mol\],
 #' \eqn{R} is the Universal Gas Constant \[8.314 J mol-1 K-1\],
 #' \eqn{T_{ref}} is the reference temperature (25 C or 298K) \[K\],
@@ -12,7 +12,7 @@
 #'
 #' WARNING: TA must be in kelvin.
 #'
-#' The equation requires air temperature (TA) in kelvin, photosynthetically active radiation (PAR) in 𝜇mol m-2 s-1, and net ecosystem exchange (NEE) in 𝜇mol m-2 s-1.
+#' The equation requires air temperature (TA) in kelvin, photosynthetically active radiation (PAR) in \eqn{\mu}mol m-2 s-1, and net ecosystem exchange (NEE) in \eqn{\mu}mol m-2 s-1.
 #'
 #' @details
 #' Model parameters are fit using the R package `brms`.

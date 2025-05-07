@@ -4,12 +4,12 @@
 #' This function uses the equation:
 #' \deqn{\text{NEE} \sim a_x \left( 1 - \exp \left( a_1 \cdot \left( \text{PAR} - I_{\text{comp}} \right) \right) \right)}
 #'
-#' Where NEE is daytime net ecosystem exchange (𝜇mol CO2 m-2 s-1),
-#' \eqn{a_x} is the maximum photosynthesis rate (𝜇mol CO2 m-2 s-1),
+#' Where NEE is daytime net ecosystem exchange (\eqn{\mu}mol CO2 m-2 s-1),
+#' \eqn{a_x} is the maximum photosynthesis rate (\eqn{\mu}mol CO2 m-2 s-1),
 #' \eqn{a_1} is a coefficient,
 #' and \eqn{I_{\text{comp}}} is the compensation light level with the same unit of PAR.
 #'
-#' The equation requires photosynthetically active radiation, PAR, in 𝜇mol m-2 s-1 and net ecosystem exchange, NEE, in 𝜇mol m-2 s-1.
+#' The equation requires photosynthetically active radiation, PAR, in \eqn{\mu}mol m-2 s-1 and net ecosystem exchange, NEE, in \eqn{\mu}mol m-2 s-1.
 #'
 #' @details
 #' Model parameters are fit using the R package `brms`.

@@ -41,11 +41,11 @@ brms::prior(normal(2.10, 0.11), nlpar = "r", lb = 1.9, ub = 2.2)
 This function uses the equation:
 \deqn{\text{NEE} \sim \frac{a_1 \cdot \text{PAR} \cdot a_x}{a_1 \cdot \text{PAR} + a_x} - r}
 
-Where \eqn{r} is ecosystem respiration (𝜇mol CO2 m-2 s-1),
+Where \eqn{r} is ecosystem respiration (\eqn{\mu}mol CO2 m-2 s-1),
 \eqn{a_1} is the apparent quantum efficiency of CO2 uptake (CO2),
 and \eqn{a_x} is the maximum CO2 uptake rate on the ecosystem scale.
 
-The equation requires photosynthetically active radiation, PAR, in 𝜇mol m-2 s-1 and net ecosystem exchange, NEE, in 𝜇mol m-2 s-1.
+The equation requires photosynthetically active radiation, PAR, in \eqn{\mu}mol m-2 s-1 and net ecosystem exchange, NEE, in \eqn{\mu}mol m-2 s-1.
 }
 \details{
 Model parameters are fit using the R package \code{brms}.

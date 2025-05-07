@@ -4,13 +4,13 @@
 #' This function uses the equation:
 #' \deqn{\text{NEE} \sim a_x \left( 1 - \exp \left( -\frac{a_1 \cdot \text{PAR}}{a_x} \right) \right) - r}
 #'
-#' Where NEE is net ecosystem exchange in 𝜇mol m-2 s-1,
+#' Where NEE is net ecosystem exchange in \eqn{\mu}mol m-2 s-1,
 #' \eqn{a_x} is light-saturated net photosynthetic rate,
 #' \eqn{a_1} is the initial quantum efficiency or intrinsic quantum yield,
 #' PAR is Photosynthetically active radiation in mol m-2 s-1,
 #' and \eqn{r} is dark respiration rate.
 #'
-#' The equation requires photosynthetically active radiation, PAR, in 𝜇mol m-2 s-1 and net ecosystem exchange, NEE, in 𝜇mol m-2 s-1.
+#' The equation requires photosynthetically active radiation, PAR, in \eqn{\mu}mol m-2 s-1 and net ecosystem exchange, NEE, in \eqn{\mu}mol m-2 s-1.
 #'
 #' Reference: https://link.springer.com/article/10.1007/s12010-015-1543-0.
 #' Equation # 8 in the paper (reference).

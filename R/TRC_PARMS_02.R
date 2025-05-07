@@ -4,12 +4,12 @@
 #' This function uses the equation:
 #' \deqn{\text{NEE} \sim r_0 \cdot \exp \left( \alpha \cdot T + \beta \cdot T^2 \right)}
 #'
-#' Where NEE is nighttime NEE, that is, ecosystem respiration (𝜇mol CO2 m-2 s-1),
+#' Where NEE is nighttime NEE, that is, ecosystem respiration (\eqn{\mu}mol CO2 m-2 s-1),
 #' TA is air temperature (°C),
 #' \eqn{r_0} is ecosystem respiration at TA = 0 °C,
 #' and alpha and beta are coefficients.
 #'
-#' The equation requires air temperature (TA) in degrees Celsius, photosynthetically active radiation (PAR) in 𝜇mol m-2 s-1, and net ecosystem exchange (NEE) in 𝜇mol m-2 s-1.
+#' The equation requires air temperature (TA) in degrees Celsius, photosynthetically active radiation (PAR) in \eqn{\mu}mol m-2 s-1, and net ecosystem exchange (NEE) in \eqn{\mu}mol m-2 s-1.
 #'
 #' @details
 #' Model parameters are fit using the R package `brms`.
