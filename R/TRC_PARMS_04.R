@@ -118,8 +118,8 @@ TRC_PARMS_04 <- function(data.frame = NULL,
 
     base::try(model.brms.df <- summary(model.brms)$fixed, silent = F)
 
-    base::try(model.brms.df.a <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'Q10_Intercept'), silent = F)
-    base::try(model.brms.df.b <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'Rref_Intercept'), silent = F)
+    base::try(model.brms.df.Q10 <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'Q10_Intercept'), silent = F)
+    base::try(model.brms.df.Rref <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'Rref_Intercept'), silent = F)
 
     base::try(samples <- df.sub %>% dplyr::filter(idx == i) %>% dplyr::select(nee) %>% stats::na.omit() %>% base::nrow(), silent = F)
     base::try(baseline <- base::as.Date(base::paste(i, '-01', sep = "")) %>% lubridate::days_in_month()*48 %>% base::as.numeric(), silent = F)
