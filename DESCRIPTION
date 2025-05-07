@@ -19,10 +19,15 @@ Authors@R: c(
          role = "aut"),
   person(given = "Junna", family = "Wang", 
          email = "junna.wang@yale.edu",
+         comment = c(ORCID = "0000-0003-3885-846X"),
          role = "aut"),
   person(given = "Boya", family = "Zhang", 
          email = "boya.zhang@yale.edu",
          comment = c(ORCID = "0000-0002-6860-2054"),
+         role = "aut"),
+  person(given = "Ammara", family = "Talib", 
+         email = "ammara.talib@yale.edu",
+         comment = c(ORCID = "0000-0003-3259-0220"),
          role = "aut")
          )
 Description: Carbon flux partitioning functions that use daytime net ecosystem exchange (NEE)
