@@ -12,6 +12,7 @@ Authors@R: c(
          role = "aut"),
   person(given = "Sam", family = "Jurado", 
          email = "sam.jurado@yale.edu",
+         comment = c(ORCID = "0009-0005-1902-4066"),
          role = "aut"),
   person(given = "David E", family = "Reed", 
          email = "david.e.reed@yale.edu",
