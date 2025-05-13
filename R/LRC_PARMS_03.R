@@ -127,12 +127,12 @@ LRC_PARMS_03 <- function(data.frame = NULL,
     base::try(model.brms <- brms::brm(brms::bf(equation, ax+a1+r ~ 1, nl = TRUE),
                                       prior = priors.lrc, data = df, iter = iterations, cores = 3, chains = 1, backend = "cmdstanr"), silent = F)
 
-    stats::print(model.brms)
+    base::print(model.brms)
 
-    stats::try(model.brms.df <- summary(model.brms)$fixed, silent = T)
-    stats::try(model.brms.df.ax <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'ax_Intercept'), silent = F)
-    stats::try(model.brms.df.a1 <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'a1_Intercept'), silent = F)
-    stats::try(model.brms.df.r <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'r_Intercept'), silent = F)
+    base::try(model.brms.df <- summary(model.brms)$fixed, silent = T)
+    base::try(model.brms.df.ax <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'ax_Intercept'), silent = F)
+    base::try(model.brms.df.a1 <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'a1_Intercept'), silent = F)
+    base::try(model.brms.df.r <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'r_Intercept'), silent = F)
 
     samples <- df.sub %>% dplyr::filter(idx == i) %>% dplyr::select(nee) %>% stats::na.omit() %>% base::nrow()
 
