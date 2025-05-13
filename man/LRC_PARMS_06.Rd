@@ -7,9 +7,9 @@
 LRC_PARMS_06(
   data.frame = NULL,
   iterations = NULL,
-  priors.lrc = brms::prior(normal(-5, 5), nlpar = "ax", lb = -30, ub = 0) +
-    brms::prior(normal(0.1, 1), nlpar = "alpha", lb = 0, ub = 1) +
-    brms::prior(normal(300, 100), nlpar = "Icomp", lb = 0, ub = 500),
+  priors.lrc = brms::prior("normal(-5, 5)", nlpar = "ax", lb = -30, ub = 0) +
+    brms::prior("normal(0.1, 1)", nlpar = "alpha", lb = 0, ub = 1) +
+    brms::prior("normal(300, 100)", nlpar = "Icomp", lb = 0, ub = 500),
   idx.colname = NULL,
   NEE.colname = NULL,
   PAR.colname = NULL
@@ -23,9 +23,9 @@ LRC_PARMS_06(
 \item{priors.lrc}{(brmsprior dataframe) The priors for \code{brms::brm()} to use.
 Default priors are as follows:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{brms::prior(normal(-5, 5), nlpar = "ax", lb = -30, ub = 0) +
-brms::prior(normal(0.1, 1), nlpar = "alpha", lb = 0, ub = 1) +
-brms::prior(normal(300, 100), nlpar = "Icomp", lb = 0, ub = 500)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{brms::prior("normal(-5, 5)", nlpar = "ax", lb = -30, ub = 0) +
+brms::prior("normal(0.1, 1)", nlpar = "alpha", lb = 0, ub = 1) +
+brms::prior("normal(300, 100)", nlpar = "Icomp", lb = 0, ub = 500)
 }\if{html}{\out{</div>}}}
 
 \item{idx.colname}{(character) The name of the column containing the index.}

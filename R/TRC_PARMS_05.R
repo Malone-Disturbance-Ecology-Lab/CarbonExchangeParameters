@@ -29,8 +29,8 @@
 #' @param priors.trc (brmsprior dataframe) The priors for `brms::brm()` to use.
 #' Default priors are as follows:
 #' ```
-#' brms::prior(normal(0.2, 1), nlpar = "a", lb = 0.1, ub = 1) +
-#' brms::prior(normal(0.5, 0.03), nlpar = "b", lb = 0.001, ub = 0.9)
+#' brms::prior("normal(0.2, 1)", nlpar = "a", lb = 0.1, ub = 1) +
+#' brms::prior("normal(0.5, 0.03)", nlpar = "b", lb = 0.001, ub = 0.9)
 #' ```
 #' @param idx.colname (character) The name of the column containing the index.
 #' @param NEE.colname (character) The name of the column containing NEE.
@@ -46,8 +46,8 @@
 #'
 TRC_PARMS_05 <- function(data.frame = NULL,
                          iterations = NULL,
-                         priors.trc = brms::prior(normal(0.2 , 1), nlpar = "a", lb = 0.1, ub = 1) +
-                           brms::prior(normal(0.5, 0.03), nlpar = "b", lb = 0.001, ub = 0.9),
+                         priors.trc = brms::prior("normal(0.2 , 1)", nlpar = "a", lb = 0.1, ub = 1) +
+                           brms::prior("normal(0.5, 0.03)", nlpar = "b", lb = 0.001, ub = 0.9),
                          idx.colname = NULL,
                          NEE.colname = NULL,
                          PAR.colname = NULL,

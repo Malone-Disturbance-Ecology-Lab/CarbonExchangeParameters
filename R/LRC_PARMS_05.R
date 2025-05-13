@@ -34,10 +34,10 @@
 #' @param priors.lrc (brmsprior dataframe) The priors for `brms::brm()` to use.
 #' Default priors are as follows:
 #' ```
-#' brms::prior(normal(-0.12, 0.1), nlpar = "a", lb = -0.2, ub = 0) +
-#' brms::prior(normal(0, 1), nlpar = "B", lb = -1, ub = 1) +
-#' brms::prior(normal(0.2, 0.1), nlpar = "Y", lb = 0, ub = 0.3) +
-#' brms::prior(normal(0.0, 0.1), nlpar = "Z", lb = -0.1, ub = 0.2)
+#' brms::prior("normal(-0.12, 0.1)", nlpar = "a", lb = -0.2, ub = 0) +
+#' brms::prior("normal(0, 1)", nlpar = "B", lb = -1, ub = 1) +
+#' brms::prior("normal(0.2, 0.1)", nlpar = "Y", lb = 0, ub = 0.3) +
+#' brms::prior("normal(0.0, 0.1)", nlpar = "Z", lb = -0.1, ub = 0.2)
 #' ```
 #' @param idx (character) The name of the column containing the index.
 #' @param nee (character) The name of the column containing NEE.
@@ -52,10 +52,10 @@
 #'
 LRC_PARMS_05 <- function(data.frame = NULL,
                          iterations = NULL,
-                         priors.lrc = brms::prior(normal(-0.12, 0.1), nlpar = "a", lb = -0.2, ub = 0) +
-                           brms::prior(normal(0, 1), nlpar = "B", lb = -1, ub = 1) +
-                           brms::prior(normal(0.2, 0.1), nlpar = "Y", lb = 0, ub = 0.3) +
-                           brms::prior(normal(0.0, 0.1), nlpar = "Z", lb = -0.1, ub = 0.2),
+                         priors.lrc = brms::prior("normal(-0.12, 0.1)", nlpar = "a", lb = -0.2, ub = 0) +
+                           brms::prior("normal(0, 1)", nlpar = "B", lb = -1, ub = 1) +
+                           brms::prior("normal(0.2, 0.1)", nlpar = "Y", lb = 0, ub = 0.3) +
+                           brms::prior("normal(0.0, 0.1)", nlpar = "Z", lb = -0.1, ub = 0.2),
                          idx = NULL,
                          nee = NULL,
                          PAR = NULL){

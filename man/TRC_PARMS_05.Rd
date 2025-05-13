@@ -7,8 +7,8 @@
 TRC_PARMS_05(
   data.frame = NULL,
   iterations = NULL,
-  priors.trc = brms::prior(normal(0.2, 1), nlpar = "a", lb = 0.1, ub = 1) +
-    brms::prior(normal(0.5, 0.03), nlpar = "b", lb = 0.001, ub = 0.9),
+  priors.trc = brms::prior("normal(0.2 , 1)", nlpar = "a", lb = 0.1, ub = 1) +
+    brms::prior("normal(0.5, 0.03)", nlpar = "b", lb = 0.001, ub = 0.9),
   idx.colname = NULL,
   NEE.colname = NULL,
   PAR.colname = NULL,
@@ -23,8 +23,8 @@ TRC_PARMS_05(
 \item{priors.trc}{(brmsprior dataframe) The priors for \code{brms::brm()} to use.
 Default priors are as follows:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{brms::prior(normal(0.2, 1), nlpar = "a", lb = 0.1, ub = 1) +
-brms::prior(normal(0.5, 0.03), nlpar = "b", lb = 0.001, ub = 0.9)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{brms::prior("normal(0.2, 1)", nlpar = "a", lb = 0.1, ub = 1) +
+brms::prior("normal(0.5, 0.03)", nlpar = "b", lb = 0.001, ub = 0.9)
 }\if{html}{\out{</div>}}}
 
 \item{idx.colname}{(character) The name of the column containing the index.}

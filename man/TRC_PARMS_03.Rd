@@ -7,9 +7,9 @@
 TRC_PARMS_03(
   data.frame = NULL,
   iterations = NULL,
-  priors.trc = brms::prior(normal(0.08, 0.03), nlpar = "a", lb = 0, ub = 0.9) +
-    brms::prior(normal(24, 4), nlpar = "Topt", lb = 10, ub = 40) +
-    brms::prior(normal(3.8, 5), nlpar = "ERmax", lb = 0, ub = 10),
+  priors.trc = brms::prior("normal(0.08, 0.03)", nlpar = "a", lb = 0, ub = 0.9) +
+    brms::prior("normal(24, 4)", nlpar = "Topt", lb = 10, ub = 40) +
+    brms::prior("normal(3.8, 5)", nlpar = "ERmax", lb = 0, ub = 10),
   idx.colname = NULL,
   NEE.colname = NULL,
   PAR.colname = NULL,
@@ -24,9 +24,9 @@ TRC_PARMS_03(
 \item{priors.trc}{(brmsprior dataframe) The priors for \code{brms::brm()} to use.
 Default priors are as follows:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{brms::prior(normal(0.08, 0.03), nlpar = "a", lb = 0, ub = 0.9) +
-brms::prior(normal(24, 4), nlpar = "Topt", lb = 10, ub = 40) +
-brms::prior(normal(3.8, 5), nlpar = "ERmax", lb = 0, ub = 10)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{brms::prior("normal(0.08, 0.03)", nlpar = "a", lb = 0, ub = 0.9) +
+brms::prior("normal(24, 4)", nlpar = "Topt", lb = 10, ub = 40) +
+brms::prior("normal(3.8, 5)", nlpar = "ERmax", lb = 0, ub = 10)
 }\if{html}{\out{</div>}}}
 
 \item{idx.colname}{(character) The name of the column containing the index.}

@@ -7,9 +7,9 @@
 TRC_PARMS_02(
   data.frame = NULL,
   iterations = NULL,
-  priors.trc = brms::prior(normal(1, 5), nlpar = "r0", lb = 0, ub = 5) +
-    brms::prior(normal(0.07, 0.1), nlpar = "alpha", lb = 0, ub = 0.2) +
-    brms::prior(normal(0, 0.05), nlpar = "beta", lb = -0.1, ub = 0.1),
+  priors.trc = brms::prior("normal(1, 5)", nlpar = "r0", lb = 0, ub = 5) +
+    brms::prior("normal(0.07, 0.1)", nlpar = "alpha", lb = 0, ub = 0.2) +
+    brms::prior("normal(0, 0.05)", nlpar = "beta", lb = -0.1, ub = 0.1),
   idx.colname = NULL,
   NEE.colname = NULL,
   PAR.colname = NULL,
@@ -24,9 +24,9 @@ TRC_PARMS_02(
 \item{priors.trc}{(brmsprior dataframe) The priors for \code{brms::brm()} to use.
 Default priors are as follows:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{brms::prior(normal(1, 5), nlpar = "r0", lb = 0, ub = 5) +
-brms::prior(normal(0.07, 0.1), nlpar = "alpha", lb = 0, ub = 0.2) +
-brms::prior(normal(0, 0.05), nlpar = "beta", lb = -0.1, ub = 0.1)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{brms::prior("normal(1, 5)", nlpar = "r0", lb = 0, ub = 5) +
+brms::prior("normal(0.07, 0.1)", nlpar = "alpha", lb = 0, ub = 0.2) +
+brms::prior("normal(0, 0.05)", nlpar = "beta", lb = -0.1, ub = 0.1)
 }\if{html}{\out{</div>}}}
 
 \item{idx.colname}{(character) The name of the column containing the index.}

@@ -7,10 +7,10 @@
 LRC_PARMS_02(
   data.frame = NULL,
   iterations = NULL,
-  priors.lrc = brms::prior(normal(-0.01, 0.1), nlpar = "a1", lb = -0.2, ub = 0) +
-    brms::prior(normal(-7.65, 0.33), nlpar = "ax", lb = -30, ub = -5) +
-    brms::prior(normal(2.1, 0.11), nlpar = "r", lb = 1.9, ub = 2.2) +
-    brms::prior(normal(25, 25), nlpar = "theta", lb = 0, ub = 3),
+  priors.lrc = brms::prior("normal(-0.01, 0.1)", nlpar = "a1", lb = -0.2, ub = 0) +
+    brms::prior("normal(-7.65, 0.33)", nlpar = "ax", lb = -30, ub = -5) +
+    brms::prior("normal(2.10, 0.11)", nlpar = "r", lb = 1.9, ub = 2.2) +
+    brms::prior("normal(25, 25)", nlpar = "theta", lb = 0, ub = 3),
   idx.colname = NULL,
   NEE.colname = NULL,
   PAR.colname = NULL
@@ -24,10 +24,10 @@ LRC_PARMS_02(
 \item{priors.lrc}{(brmsprior dataframe) The priors for \code{brms::brm()} to use.
 Default priors are as follows:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{brms::prior(normal(-0.01, 0.1), nlpar = "a1", lb = -0.2, ub = 0) +
-brms::prior(normal(-7.65, 0.33), nlpar = "ax", lb = -30, ub = -5) +
-brms::prior(normal(2.10, 0.11), nlpar = "r", lb = 1.9, ub = 2.2)+
-brms::prior(normal(25, 25), nlpar = "theta", lb = 0, ub = 3)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{brms::prior("normal(-0.01, 0.1)", nlpar = "a1", lb = -0.2, ub = 0) +
+brms::prior("normal(-7.65, 0.33)", nlpar = "ax", lb = -30, ub = -5) +
+brms::prior("normal(2.10, 0.11)", nlpar = "r", lb = 1.9, ub = 2.2)+
+brms::prior("normal(25, 25)", nlpar = "theta", lb = 0, ub = 3)
 }\if{html}{\out{</div>}}}
 
 \item{idx.colname}{(character) The name of the column containing the index.}
