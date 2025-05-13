@@ -51,4 +51,5 @@ Imports:
     tidybayes
 Remotes: 
     stan-dev/cmdstanr
-URL: https://malone-disturbance-ecology-lab.github.io/CarbonExchangeParameters/
+URL: https://github.com/Malone-Disturbance-Ecology-Lab/CarbonExchangeParameters, https://malone-disturbance-ecology-lab.github.io/CarbonExchangeParameters/
+BugReports: https://github.com/Malone-Disturbance-Ecology-Lab/CarbonExchangeParameters/issues
