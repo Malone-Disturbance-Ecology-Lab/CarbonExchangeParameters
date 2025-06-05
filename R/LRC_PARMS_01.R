@@ -51,6 +51,7 @@
 #'
 #'# Import flux tower data
 #'tower.data <- read.csv('AMF_US-Skr_BASE_HH_2-5_Formatted.csv')
+#'tower.data <- read.csv(system.file("extdata", "AMF_US-Skr_BASE_HH_2-5_Formatted.csv", package = "CarbonExchangeParameters"))
 #'
 #' # Fit curve parameters for each YearMon:
 #'Example_LRC_PARMS_01 <- LRC_PARMS_01(data.frame = tower.data,
@@ -60,9 +61,8 @@
 #'                                       brms::prior("normal(2.10, 0.11)", nlpar = "r", lb = 1.9, ub = 2.2),
 #'                                     idx.colname = 'YearMon',
 #'                                     NEE.colname = 'NEE_PI',
-#'                                     PAR.colname = 'SW_IN' )
+#'                                     PAR.colname = 'SW_IN')
 #'
-#' LRC_PARMS_01( data.frame = NULL,iterations =)
 #'
 LRC_PARMS_01 <- function(data.frame = NULL,
                          iterations = NULL,
