@@ -46,9 +46,13 @@
 #' @export
 #'
 #' @examples
+#'# Set the working directory to the location of the sampledata file: AMF_US-Skr_BASE_HH_2-5_Formatted.csv
 #'setwd('sampledata')
+#'
+#'# Import flux tower data
 #'tower.data <- read.csv('AMF_US-Skr_BASE_HH_2-5_Formatted.csv')
 #'
+#' # Fit curve parameters for each YearMon:
 #'Example_LRC_PARMS_01 <- LRC_PARMS_01(data.frame = tower.data,
 #'                                     iterations = 1000,
 #'                                     priors.lrc = brms::prior("normal(-0.01, 0.1)", nlpar = "a1", lb = -0.2, ub = 0) +
