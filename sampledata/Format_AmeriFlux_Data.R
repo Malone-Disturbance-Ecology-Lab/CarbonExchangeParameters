@@ -1,6 +1,6 @@
-library(tidyverse)
-library(stringr)
 # Format Ameriflux data : https://ameriflux.lbl.gov/
+library(tidyverse)
+library( brms)
 
 setwd('sampledata')
 af.data <- read.csv('AMF_US-Skr_BASE_HH_2-5.csv', skip=2 )

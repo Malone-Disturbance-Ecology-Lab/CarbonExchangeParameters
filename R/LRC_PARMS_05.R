@@ -48,7 +48,20 @@
 #' @export
 #'
 #' @examples
-#' # Write examples here
+#' # Set the working directory to the location of the sampledata file: AMF_US-Skr_BASE_HH_2-5_Formatted.csv
+#'setwd('sampledata')
+#'# Import flux tower data
+#'tower.data <- read.csv('AMF_US-Skr_BASE_HH_2-5_Formatted.csv')
+#'# Fit curve parameters for each YearMon:
+#'Example_LRC_PARMS_05 <-LRC_PARMS_05(data.frame = tower.data,
+#'                                    iterations = 1000,
+#'                                    priors.lrc = brms::prior("normal(-0.12, 0.1)", nlpar = "a", lb = -0.2, ub = 0) +
+#'                                    brms::prior("normal(0, 1)", nlpar = "B", lb = -1, ub = 1) +
+#'                                    brms::prior("normal(0.2, 0.1)", nlpar = "Y", lb = 0, ub = 0.3) +
+#'                                    brms::prior("normal(0.0, 0.1)", nlpar = "Z", lb = -0.1, ub = 0.2),
+#'                                    idx.colname = 'YearMon',
+#'                                    NEE.colname = 'NEE_PI',
+#'                                    PAR.colname = 'SW_IN')
 #'
 LRC_PARMS_05 <- function(data.frame = NULL,
                          iterations = NULL,
@@ -56,14 +69,14 @@ LRC_PARMS_05 <- function(data.frame = NULL,
                            brms::prior("normal(0, 1)", nlpar = "B", lb = -1, ub = 1) +
                            brms::prior("normal(0.2, 0.1)", nlpar = "Y", lb = 0, ub = 0.3) +
                            brms::prior("normal(0.0, 0.1)", nlpar = "Z", lb = -0.1, ub = 0.2),
-                         idx = NULL,
-                         nee = NULL,
-                         PAR = NULL){
+                         idx.colname = NULL,
+                         NEE.colname = NULL,
+                         PAR.colname = NULL){
+  data.frame$nee <- data.frame[,NEE.colname]
+  data.frame$idx <- data.frame[,idx.colname]
+  data.frame$PAR <- data.frame[,PAR.colname]
 
   df <- data.frame %>%
-    dplyr::mutate(idx = idx,
-                  nee = nee,
-                  PAR = PAR) %>%
     dplyr::select(idx, nee, PAR)
 
   equation <- nee ~ a * exp(-B * PAR) - Y * exp(-Z * PAR)
@@ -120,7 +133,7 @@ LRC_PARMS_05 <- function(data.frame = NULL,
     #priors <- get_prior(bf(equation, a1+ax+r ~ 1, nl=TRUE),data = df %>% filter(PAR > 0), family = poisson())
 
     base::try(model.brms <- brms::brm(brms::bf(equation, a+B+Y+Z ~ 1, nl = TRUE),
-                                      prior = priors.lrc, data = df, iter = iterations, cores = 3, chains = 1, backend = "cmdstanr"), silent = F)
+                                      prior = priors.lrc, data = df.sub, iter = iterations, cores = 3, chains = 1, backend = "cmdstanr"), silent = F)
 
     base::print(model.brms)
 
