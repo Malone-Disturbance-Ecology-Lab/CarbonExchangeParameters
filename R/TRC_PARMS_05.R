@@ -42,7 +42,19 @@
 #' @export
 #'
 #' @examples
-#' # Write examples here
+#' # Set the working directory to the location of the sampledata file: AMF_US-Skr_BASE_HH_2-5_Formatted.csv
+#' setwd('sampledata')
+#' # Import flux tower data
+#' tower.data <- read.csv('AMF_US-Skr_BASE_HH_2-5_Formatted.csv')
+#' # Fit curve parameters for each YearMon:
+#' Example_TRC_PARMS_05 <-TRC_PARMS_05(data.frame = tower.data,
+#'                                     iterations = 5000,
+#'                                     priors.trc = brms::prior("normal(0.2 , 1)", nlpar = "a", lb = 0.1, ub = 1) +
+#'                                       brms::prior("normal(0.5, 0.03)", nlpar = "b", lb = 0.001, ub = 0.9),
+#'                                     idx.colname = 'YearMon',
+#'                                     NEE.colname = 'NEE_PI',
+#'                                     PAR.colname = 'SW_IN',
+#'                                     TA.colname = 'TA_1_1_1')
 #'
 TRC_PARMS_05 <- function(data.frame = NULL,
                          iterations = NULL,

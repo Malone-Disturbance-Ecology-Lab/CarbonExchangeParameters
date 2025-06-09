@@ -42,21 +42,33 @@
 #' @export
 #'
 #' @examples
-#' # Write examples here
+#' # Set the working directory to the location of the sampledata file: AMF_US-Skr_BASE_HH_2-5_Formatted.csv
+#' setwd('sampledata')
+#' # Import flux tower data
+#' tower.data <- read.csv('AMF_US-Skr_BASE_HH_2-5_Formatted.csv')
+#' # Fit curve parameters for each YearMon:
+#' Example_TRC_PARMS_01 <-TRC_PARMS_01(data.frame = tower.data,
+#'                                     iterations = 1000,
+#'                                     priors.trc = brms::prior("normal(0.5, 0.3)", nlpar = "E0", lb = 0.01, ub = 1) +
+#'                                       brms::prior("normal(1.0, 0.3)", nlpar = "Rref", lb = 0.01, ub = 1),
+#'                                     idx.colname = 'YearMon',
+#'                                     NEE.colname = 'NEE_PI',
+#'                                     PAR.colname = 'SW_IN',
+#'                                    TA.colname = 'TA_1_1_1')
 #'
 TRC_PARMS_01 <- function(data.frame = NULL,
                          iterations = NULL,
                          priors.trc = brms::prior("normal(0.5, 0.3)", nlpar = "E0", lb = 0.01, ub = 1) +
                            brms::prior("normal(1.0, 0.3)", nlpar = "Rref", lb = 0.01, ub = 1),
                          idx.colname = NULL,
-                         nee.colname = NULL,
+                         NEE.colname = NULL,
                          TA.colname = NULL,
                          PAR.colname = NULL){
 
   # Squelch visible bindings note
   nee <- idx <- TA <- PAR <- NULL
 
-  data.frame$nee <- data.frame[,nee.colname]
+  data.frame$nee <- data.frame[,NEE.colname]
   data.frame$idx <- data.frame[,idx.colname]
   data.frame$TA <- data.frame[,TA.colname]
   data.frame$PAR <- data.frame[,PAR.colname]
