@@ -19,3 +19,10 @@ af.data.formatted <- af.data %>%  mutate( Year = TIMESTAMP_START %>% substr( 1,4
 
 
 write.csv(af.data.formatted, 'AMF_US-Skr_BASE_HH_2-5_Formatted.csv')
+
+af.data.formatted_v2 <- read.csv("AMF_US-Skr_BASE_HH_2-5_Formatted.csv") %>%
+  dplyr::select(TIMESTAMP_START, TIMESTAMP_END, TA_1_1_1, NEE_PI, SW_IN, YearMon)
+
+write.csv(af.data.formatted_v2, file.path("inst", "extdata", "AMF_US-Skr_BASE_HH_2-5_Formatted.csv"), row.names = F)
+
+
