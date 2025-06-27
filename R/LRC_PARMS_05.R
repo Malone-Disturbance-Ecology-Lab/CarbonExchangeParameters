@@ -39,29 +39,34 @@
 #' brms::prior("normal(0.2, 0.1)", nlpar = "Y", lb = 0, ub = 0.3) +
 #' brms::prior("normal(0.0, 0.1)", nlpar = "Z", lb = -0.1, ub = 0.2)
 #' ```
-#' @param idx (character) The name of the column containing the index.
-#' @param nee (character) The name of the column containing NEE.
-#' @param PAR (character) The name of the column containing PAR.
+#' @param idx.colname (character) The name of the column containing the index.
+#' @param NEE.colname (character) The name of the column containing NEE.
+#' @param PAR.colname (character) The name of the column containing PAR.
 #'
 #' @returns (dataframe) Dataframe of parameter values by the index used to fit them.
 #' @importFrom magrittr %>%
 #' @export
 #'
 #' @examples
-#' # Set the working directory to the location of the sampledata file: AMF_US-Skr_BASE_HH_2-5_Formatted.csv
-#'setwd('sampledata')
-#'# Import flux tower data
-#'tower.data <- read.csv('AMF_US-Skr_BASE_HH_2-5_Formatted.csv')
-#'# Fit curve parameters for each YearMon:
-#'Example_LRC_PARMS_05 <-LRC_PARMS_05(data.frame = tower.data,
-#'                                    iterations = 1000,
-#'                                    priors.lrc = brms::prior("normal(-0.12, 0.1)", nlpar = "a", lb = -0.2, ub = 0) +
-#'                                    brms::prior("normal(0, 1)", nlpar = "B", lb = -1, ub = 1) +
-#'                                    brms::prior("normal(0.2, 0.1)", nlpar = "Y", lb = 0, ub = 0.3) +
-#'                                    brms::prior("normal(0.0, 0.1)", nlpar = "Z", lb = -0.1, ub = 0.2),
-#'                                    idx.colname = 'YearMon',
-#'                                    NEE.colname = 'NEE_PI',
-#'                                    PAR.colname = 'SW_IN')
+#' # Import flux tower data
+#' tower.data <- read.csv(system.file("extdata", "AMF_US-Skr_BASE_HH_2-5_Formatted.csv",
+#'                                    package = "CarbonExchangeParameters"))
+#'
+#' # Fit curve parameters for each YearMon:
+#' Example_LRC_PARMS_05 <- LRC_PARMS_05(data.frame = tower.data,
+#'                                      iterations = 1000,
+#'                                      priors.lrc = brms::prior("normal(-0.12, 0.1)",
+#'                                                     nlpar = "a", lb = -0.2, ub = 0) +
+#'                                                   brms::prior("normal(0, 1)",
+#'                                                     nlpar = "B", lb = -1, ub = 1) +
+#'                                                   brms::prior("normal(0.2, 0.1)",
+#'                                                     nlpar = "Y", lb = 0, ub = 0.3) +
+#'                                                   brms::prior("normal(0.0, 0.1)",
+#'                                                     nlpar = "Z", lb = -0.1, ub = 0.2),
+#'                                      idx.colname = 'YearMon',
+#'                                      NEE.colname = 'NEE_PI',
+#'                                      PAR.colname = 'SW_IN')
+#'
 #'
 LRC_PARMS_05 <- function(data.frame = NULL,
                          iterations = NULL,
@@ -72,6 +77,10 @@ LRC_PARMS_05 <- function(data.frame = NULL,
                          idx.colname = NULL,
                          NEE.colname = NULL,
                          PAR.colname = NULL){
+
+  # Squelch visible bindings note
+  nee <- idx <- PAR <- NULL
+
   data.frame$nee <- data.frame[,NEE.colname]
   data.frame$idx <- data.frame[,idx.colname]
   data.frame$PAR <- data.frame[,PAR.colname]

@@ -71,6 +71,22 @@ Key points to remember:
 Aim for Rhat close to 1 and high values for both Bulk ESS and Tail ESS.
 }
 \examples{
-# Write examples here
+# Import flux tower data
+tower.data <- read.csv(system.file("extdata", "AMF_US-Skr_BASE_HH_2-5_Formatted.csv",
+                                   package = "CarbonExchangeParameters"))
+
+# Fit curve parameters for each YearMon:
+Example_LRC_PARMS_03 <- LRC_PARMS_03(data.frame = tower.data,
+                                     iterations = 1000,
+                                     priors.lrc = brms::prior("normal(-9.9, 0.4)",
+                                                    nlpar = "ax", lb = -15, ub = 1) +
+                                                  brms::prior("normal(-0.05, 0.1)",
+                                                    nlpar = "a1", lb = -0.2, ub = 0.5) +
+                                                  brms::prior("normal(1.2, 0.11)",
+                                                    nlpar = "r", lb = 1.0, ub = 3.2),
+                                     idx.colname = 'YearMon',
+                                     NEE.colname = 'NEE_PI',
+                                     PAR.colname = 'SW_IN')
+
 
 }

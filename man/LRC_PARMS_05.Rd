@@ -11,9 +11,9 @@ LRC_PARMS_05(
     brms::prior("normal(0, 1)", nlpar = "B", lb = -1, ub = 1) +
     brms::prior("normal(0.2, 0.1)", nlpar = "Y", lb = 0, ub = 0.3) +
     brms::prior("normal(0.0, 0.1)", nlpar = "Z", lb = -0.1, ub = 0.2),
-  idx = NULL,
-  nee = NULL,
-  PAR = NULL
+  idx.colname = NULL,
+  NEE.colname = NULL,
+  PAR.colname = NULL
 )
 }
 \arguments{
@@ -30,11 +30,11 @@ brms::prior("normal(0.2, 0.1)", nlpar = "Y", lb = 0, ub = 0.3) +
 brms::prior("normal(0.0, 0.1)", nlpar = "Z", lb = -0.1, ub = 0.2)
 }\if{html}{\out{</div>}}}
 
-\item{idx}{(character) The name of the column containing the index.}
+\item{idx.colname}{(character) The name of the column containing the index.}
 
-\item{nee}{(character) The name of the column containing NEE.}
+\item{NEE.colname}{(character) The name of the column containing NEE.}
 
-\item{PAR}{(character) The name of the column containing PAR.}
+\item{PAR.colname}{(character) The name of the column containing PAR.}
 }
 \value{
 (dataframe) Dataframe of parameter values by the index used to fit them.
@@ -69,6 +69,24 @@ Key points to remember:
 Aim for Rhat close to 1 and high values for both Bulk ESS and Tail ESS.
 }
 \examples{
-# Write examples here
+# Import flux tower data
+tower.data <- read.csv(system.file("extdata", "AMF_US-Skr_BASE_HH_2-5_Formatted.csv",
+                                   package = "CarbonExchangeParameters"))
+
+# Fit curve parameters for each YearMon:
+Example_LRC_PARMS_05 <- LRC_PARMS_05(data.frame = tower.data,
+                                     iterations = 1000,
+                                     priors.lrc = brms::prior("normal(-0.12, 0.1)",
+                                                    nlpar = "a", lb = -0.2, ub = 0) +
+                                                  brms::prior("normal(0, 1)",
+                                                    nlpar = "B", lb = -1, ub = 1) +
+                                                  brms::prior("normal(0.2, 0.1)",
+                                                    nlpar = "Y", lb = 0, ub = 0.3) +
+                                                  brms::prior("normal(0.0, 0.1)",
+                                                    nlpar = "Z", lb = -0.1, ub = 0.2),
+                                     idx.colname = 'YearMon',
+                                     NEE.colname = 'NEE_PI',
+                                     PAR.colname = 'SW_IN')
+
 
 }

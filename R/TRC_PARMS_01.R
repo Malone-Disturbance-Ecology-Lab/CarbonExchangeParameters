@@ -33,7 +33,7 @@
 #' brms::prior("normal(1.0, 0.3)", nlpar = "Rref", lb = 0.01, ub = 1)
 #' ```
 #' @param idx.colname (character) The name of the column containing the index.
-#' @param nee.colname (character) The name of the column containing NEE.
+#' @param NEE.colname (character) The name of the column containing NEE.
 #' @param TA.colname (character) The name of the column containing air temperature.
 #' @param PAR.colname (character) The name of the column containing PAR.
 #'
@@ -42,19 +42,22 @@
 #' @export
 #'
 #' @examples
-#' # Set the working directory to the location of the sampledata file: AMF_US-Skr_BASE_HH_2-5_Formatted.csv
-#' setwd('sampledata')
 #' # Import flux tower data
-#' tower.data <- read.csv('AMF_US-Skr_BASE_HH_2-5_Formatted.csv')
+#' tower.data <- read.csv(system.file("extdata", "AMF_US-Skr_BASE_HH_2-5_Formatted.csv",
+#'                                    package = "CarbonExchangeParameters"))
+#'
 #' # Fit curve parameters for each YearMon:
-#' Example_TRC_PARMS_01 <-TRC_PARMS_01(data.frame = tower.data,
-#'                                     iterations = 1000,
-#'                                     priors.trc = brms::prior("normal(0.5, 0.3)", nlpar = "E0", lb = 0.01, ub = 1) +
-#'                                       brms::prior("normal(1.0, 0.3)", nlpar = "Rref", lb = 0.01, ub = 1),
-#'                                     idx.colname = 'YearMon',
-#'                                     NEE.colname = 'NEE_PI',
-#'                                     PAR.colname = 'SW_IN',
-#'                                    TA.colname = 'TA_1_1_1')
+#' Example_TRC_PARMS_01 <- TRC_PARMS_01(data.frame = tower.data,
+#'                                      iterations = 1000,
+#'                                      priors.trc = brms::prior("normal(0.5, 0.3)",
+#'                                                     nlpar = "E0", lb = 0.01, ub = 1) +
+#'                                                   brms::prior("normal(1.0, 0.3)",
+#'                                                     nlpar = "Rref", lb = 0.01, ub = 1),
+#'                                      idx.colname = 'YearMon',
+#'                                      NEE.colname = 'NEE_PI',
+#'                                      PAR.colname = 'SW_IN',
+#'                                      TA.colname = 'TA_1_1_1')
+#'
 #'
 TRC_PARMS_01 <- function(data.frame = NULL,
                          iterations = NULL,

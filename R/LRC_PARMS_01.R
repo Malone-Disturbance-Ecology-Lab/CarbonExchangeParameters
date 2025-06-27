@@ -46,22 +46,22 @@
 #' @export
 #'
 #' @examples
-#'# Set the working directory to the location of the sampledata file: AMF_US-Skr_BASE_HH_2-5_Formatted.csv
-#'setwd('sampledata')
-#'
-#'# Import flux tower data
-#'tower.data <- read.csv('AMF_US-Skr_BASE_HH_2-5_Formatted.csv')
-#'tower.data <- read.csv(system.file("extdata", "AMF_US-Skr_BASE_HH_2-5_Formatted.csv", package = "CarbonExchangeParameters"))
+#' # Import flux tower data
+#' tower.data <- read.csv(system.file("extdata", "AMF_US-Skr_BASE_HH_2-5_Formatted.csv",
+#'                                    package = "CarbonExchangeParameters"))
 #'
 #' # Fit curve parameters for each YearMon:
-#'Example_LRC_PARMS_01 <- LRC_PARMS_01(data.frame = tower.data,
-#'                                     iterations = 1000,
-#'                                     priors.lrc = brms::prior("normal(-0.01, 0.1)", nlpar = "a1", lb = -0.2, ub = 0) +
-#'                                       brms::prior("normal(-7.65, 0.33)", nlpar = "ax", lb = -30, ub = -0.01) +
-#'                                       brms::prior("normal(2.10, 0.11)", nlpar = "r", lb = 1.9, ub = 2.2),
-#'                                     idx.colname = 'YearMon',
-#'                                     NEE.colname = 'NEE_PI',
-#'                                     PAR.colname = 'SW_IN')
+#' Example_LRC_PARMS_01 <- LRC_PARMS_01(data.frame = tower.data,
+#'                                      iterations = 1000,
+#'                                      priors.lrc = brms::prior("normal(-0.01, 0.1)",
+#'                                                     nlpar = "a1", lb = -0.2, ub = 0) +
+#'                                                   brms::prior("normal(-7.65, 0.33)",
+#'                                                     nlpar = "ax", lb = -30, ub = -0.01) +
+#'                                                   brms::prior("normal(2.10, 0.11)",
+#'                                                     nlpar = "r", lb = 1.9, ub = 2.2),
+#'                                      idx.colname = 'YearMon',
+#'                                      NEE.colname = 'NEE_PI',
+#'                                      PAR.colname = 'SW_IN')
 #'
 #'
 LRC_PARMS_01 <- function(data.frame = NULL,

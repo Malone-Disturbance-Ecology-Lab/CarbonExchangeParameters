@@ -51,20 +51,24 @@
 #' @export
 #'
 #' @examples
-#' # Set the working directory to the location of the sampledata file: AMF_US-Skr_BASE_HH_2-5_Formatted.csv
-#' setwd('sampledata')
 #' # Import flux tower data
-#' tower.data <- read.csv('AMF_US-Skr_BASE_HH_2-5_Formatted.csv')
+#' tower.data <- read.csv(system.file("extdata", "AMF_US-Skr_BASE_HH_2-5_Formatted.csv",
+#'                                    package = "CarbonExchangeParameters"))
+#'
 #' # Fit curve parameters for each YearMon:
-#' Example_TRC_PARMS_03 <-TRC_PARMS_03(data.frame = tower.data,
-#'                                     iterations = 5000,
-#'                                     priors.trc = brms::prior("normal(0.08, 0.03)", nlpar = "a", lb = 0, ub = 0.9) +
-#'                                       brms::prior("normal(24, 4)", nlpar = "Topt", lb = 10, ub = 40) +
-#'                                       brms::prior("normal(3.8, 5)", nlpar = "ERmax", lb = 0, ub = 10),
-#'                                     idx.colname = 'YearMon',
-#'                                     NEE.colname = 'NEE_PI',
-#'                                     PAR.colname = 'SW_IN',
-#'                                     TA.colname = 'TA_1_1_1')
+#' Example_TRC_PARMS_03 <- TRC_PARMS_03(data.frame = tower.data,
+#'                                      iterations = 5000,
+#'                                      priors.trc = brms::prior("normal(0.08, 0.03)",
+#'                                                     nlpar = "a", lb = 0, ub = 0.9) +
+#'                                                   brms::prior("normal(24, 4)",
+#'                                                     nlpar = "Topt", lb = 10, ub = 40) +
+#'                                                   brms::prior("normal(3.8, 5)",
+#'                                                     nlpar = "ERmax", lb = 0, ub = 10),
+#'                                      idx.colname = 'YearMon',
+#'                                      NEE.colname = 'NEE_PI',
+#'                                      PAR.colname = 'SW_IN',
+#'                                      TA.colname = 'TA_1_1_1')
+#'
 #'
 TRC_PARMS_03 <- function(data.frame = NULL,
                          iterations = NULL,
@@ -149,7 +153,7 @@ TRC_PARMS_03 <- function(data.frame = NULL,
     base::try(model.brms.df.ERmax <- model.brms.df %>% dplyr::filter(base::row.names(model.brms.df) == 'ERmax_Intercept'), silent = F)
 
     base::try(samples <- df.sub %>% dplyr::filter(idx == i) %>% dplyr::select(nee) %>% stats::na.omit() %>% base::nrow(), silent = F)
-    base::try(baseline <- base::as.Date(base::paste(i, '-01', sep = "")) %>% lubridate::days_in_month()*48 %>% base::as.numeric, silent = F)
+    base::try(baseline <- base::as.Date(base::paste(i, '-01', sep = "")) %>% lubridate::days_in_month()*48 %>% base::as.numeric(), silent = F)
 
 
     base::try(results <- base::data.frame(idx = i,

@@ -50,19 +50,22 @@
 #' @export
 #'
 #' @examples
-#' # Set the working directory to the location of the sampledata file: AMF_US-Skr_BASE_HH_2-5_Formatted.csv
-#' setwd('sampledata')
 #' # Import flux tower data
-#' tower.data <- read.csv('AMF_US-Skr_BASE_HH_2-5_Formatted.csv')
+#' tower.data <- read.csv(system.file("extdata", "AMF_US-Skr_BASE_HH_2-5_Formatted.csv",
+#'                                    package = "CarbonExchangeParameters"))
+#'
 #' # Fit curve parameters for each YearMon:
-#' Example_TRC_PARMS_06 <-TRC_PARMS_06(data.frame = tower.data,
-#'                                     iterations = 5000,
-#'                                     priors.trc = brms::prior("normal(0.5, 0.3)", nlpar = "Ea", lb = 0.01, ub = 1) +
-#'                                       brms::prior("normal(.5, .3)", nlpar = "Rref", lb = 0.01, ub = 1),
-#'                                     idx.colname = 'YearMon',
-#'                                     NEE.colname = 'NEE_PI',
-#'                                     PAR.colname = 'SW_IN',
-#'                                     TA.colname = 'TA_1_1_1')
+#' Example_TRC_PARMS_06 <- TRC_PARMS_06(data.frame = tower.data,
+#'                                      iterations = 5000,
+#'                                      priors.trc = brms::prior("normal(0.5, 0.3)",
+#'                                                     nlpar = "Ea", lb = 0.01, ub = 1) +
+#'                                                   brms::prior("normal(.5, .3)",
+#'                                                     nlpar = "Rref", lb = 0.01, ub = 1),
+#'                                      idx.colname = 'YearMon',
+#'                                      NEE.colname = 'NEE_PI',
+#'                                      PAR.colname = 'SW_IN',
+#'                                      TA.colname = 'TA_1_1_1')
+#'
 #'
 TRC_PARMS_06 <- function(data.frame = NULL,
                          iterations = NULL,
