@@ -39,16 +39,12 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Imports: 
-    beepr,
     brms,
     cmdstanr (>= 0.9.0),
     dplyr,
-    ggplot2,
-    ggpubr,
     lubridate,
     magrittr,
-    stats,
-    tidybayes
+    stats
 Remotes: 
     stan-dev/cmdstanr
 URL: https://github.com/Malone-Disturbance-Ecology-Lab/CarbonExchangeParameters, https://malone-disturbance-ecology-lab.github.io/CarbonExchangeParameters/
