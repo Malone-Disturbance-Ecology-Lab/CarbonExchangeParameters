@@ -49,7 +49,7 @@
 #' @importFrom magrittr %>%
 #' @export
 #'
-#' @examples
+#' @examplesIf !is.null(cmdstanr::cmdstan_version(error_on_NA = FALSE))
 #' # Import flux tower data
 #' tower.data <- read.csv(system.file("extdata", "AMF_US-Skr_BASE_HH_2-5_Formatted.csv",
 #'                                    package = "CarbonExchangeParameters"))

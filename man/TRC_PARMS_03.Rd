@@ -73,6 +73,7 @@ Key points to remember:
 Aim for Rhat close to 1 and high values for both Bulk ESS and Tail ESS.
 }
 \examples{
+\dontshow{if (!is.null(cmdstanr::cmdstan_version(error_on_NA = FALSE))) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Import flux tower data
 tower.data <- read.csv(system.file("extdata", "AMF_US-Skr_BASE_HH_2-5_Formatted.csv",
                                    package = "CarbonExchangeParameters"))
@@ -91,5 +92,5 @@ Example_TRC_PARMS_03 <- TRC_PARMS_03(data.frame = tower.data,
                                      PAR.colname = 'SW_IN',
                                      TA.colname = 'TA_1_1_1')
 
-
+\dontshow{\}) # examplesIf}
 }
