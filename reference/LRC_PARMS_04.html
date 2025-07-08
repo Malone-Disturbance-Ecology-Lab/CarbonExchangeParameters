@@ -125,7 +125,8 @@ Aim for Rhat close to 1 and high values for both Bulk ESS and Tail ESS.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Import flux tower data</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># !is.null(cmdstanr::cmdstan_version(error_on_NA = FALSE))</span></span></span>
+<span class="r-in"><span><span class="co"># Import flux tower data</span></span></span>
 <span class="r-in"><span><span class="va">tower.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"AMF_US-Skr_BASE_HH_2-5_Formatted.csv"</span>,</span></span>
 <span class="r-in"><span>                                   package <span class="op">=</span> <span class="st">"CarbonExchangeParameters"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -143,15 +144,8 @@ Aim for Rhat close to 1 and high values for both Bulk ESS and Tail ESS.</p>
 <span class="r-in"><span>                                    idx.colname <span class="op">=</span> <span class="st">'YearMon'</span>,</span></span>
 <span class="r-in"><span>                                    NEE.colname <span class="op">=</span> <span class="st">'NEE_PI'</span>,</span></span>
 <span class="r-in"><span>                                    PAR.colname <span class="op">=</span> <span class="st">'SW_IN'</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "GREAT JOB! your dataframe contains idx"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "YIPEE! your dataframe contains nee"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Hooray! your dataframe contains PAR"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  Your dataframe looks good and you are now ready to start fitting models</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2004-07"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Error : CmdStan path has not been set yet. See ?set_cmdstan_path.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in LRC_PARMS_04(data.frame = tower.data, iterations = 1000, priors.lrc = brms::prior("normal(-0.01, 0.1)",     nlpar = "a1", lb = -0.2, ub = 0) + brms::prior("normal(-7.65, 0.33)",     nlpar = "ax", lb = -30, ub = -5) + brms::prior("normal(2.10, 0.11)",     nlpar = "r", lb = 1.9, ub = 2.2) + brms::prior("normal(.3, .2)",     nlpar = "b", lb = 0, ub = 3), idx.colname = "YearMon", NEE.colname = "NEE_PI",     PAR.colname = "SW_IN"):</span> object 'model.brms' not found</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
