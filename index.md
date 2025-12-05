@@ -1,0 +1,40 @@
+# Carbon Exchange Parameters
+
+Ecosystem CO₂ Flux Partitioning (EC flux partitioning) methods are used
+to estimate how the total carbon flux between an ecosystem and the
+atmosphere is divided among different processes, such as photosynthesis
+(carbon uptake) and respiration (carbon release). These methods are
+important for understanding the carbon balance of ecosystems.
+
+Flux partitioning methods can use a light response curve (LRC). We can
+use daytime NEE (NEE_(day)) from tower sites to fit LRCs and nighttime
+NEE (NEE_(night)) to estimate ecosystem respiration with temperature
+response curves (TRC) at night.
+
+Here are some common methods for partitioning carbon fluxes:
+
+| Function_Name | Equation                                                                                                                                                                                                      | Data Needed   |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| LRC_PARMS_01  | $$NEE_{\text{day}} = \frac{a_{1} \cdot \text{PAR} \cdot a_{x}}{a_{1} \cdot \text{PAR} + a_{x}} - r$$                                                                                                          | NEE; PAR      |
+| LRC_PARMS_02  | $$NEE_{\text{day}} = \frac{a_{1} \cdot \text{PAR} + a_{\text{x}} - \sqrt{\left( a_{1} \cdot \text{PAR} + a_{\text{x}} \right)^{2} - 4 \cdot \text{PAR} \cdot a_{1} \cdot a_{\text{x}}}}{2 \cdot \Theta} - r$$ | NEE; PAR      |
+| LRC_PARMS_03  | $$NEE_{\text{day}} = a_{x}\left( 1 - \exp\left( - \frac{a_{1} \cdot \text{PAR}}{a_{\text{x}}} \right) \right) - r$$                                                                                           | NEE; PAR      |
+| LRC_PARMS_04  | $$NEE_{\text{day}} = a_{1}\left( \frac{1 - B \cdot \text{PAR}}{1 + Y \cdot \text{PAR}} \right) \cdot \text{PAR} - r$$                                                                                         | NEE; PAR      |
+| LRC_PARMS_05  | $$NEE_{\text{day}} = - a_{1} \cdot \exp\left( - B \cdot \text{PAR} \right) - Y \cdot \exp\left( Z \cdot \text{PAR} \right)$$                                                                                  | NEE; PAR      |
+| LRC_PARMS_06  | $$NEE_{\text{day}} = a_{x}\left( 1 - \exp\left( a_{1} \cdot \left( \text{PAR} - I_{\text{comp}} \right) \right) \right)$$                                                                                     | NEE; PAR      |
+| LRC_PARMS_07  | $$NEE_{\text{day}} = \frac{a_{1} \cdot \text{PAR} \cdot \beta}{a_{1} \cdot \text{PAR} + \beta}$$                                                                                                              | NEE; PAR; VPD |
+| TRC_PARMS_01  | $$NEE_{\text{night}} = r_{b} \cdot \exp\left( E_{0}\left( \left( \frac{1}{T_{\text{ref}} - T_{0}} \right) - \left( \frac{1}{T_{\text{air}} - T_{0}} \right) \right) \right)$$                                 | NEE; T        |
+| TRC_PARMS_02  | $$NEE_{\text{night}} = r_{0} \cdot \exp\left( \alpha \cdot T + \beta \cdot T^{2} \right)$$                                                                                                                    | NEE; T        |
+| TRC_PARMS_03  | $$NEE_{\text{night}} = a\left( T - T_{\text{opt}} \right)^{2} + E_{\text{Rmax}}$$                                                                                                                             | NEE; T        |
+| TRC_PARMS_04  | $$NEE_{\text{night}} = R_{\text{ref}} \cdot Q_{10} \cdot \exp\left( \frac{T - T_{\text{ref}}}{10} \right)$$                                                                                                   | NEE; T        |
+| TRC_PARMS_05  | $$NEE_{\text{night}} = a*\exp(b*T)$$                                                                                                                                                                          | NEE; ?        |
+| TRC_PARMS_06  | $$NEE_{\text{night}} = R_{\text{ref}} \cdot \exp\left( \frac{E_{a}}{R}\left( \frac{1}{T_{\text{ref}}} - \frac{1}{T} \right) \right)$$                                                                         | NEE; T        |
+
+## Installation
+
+You can install the development version of CarbonExchangeParameters from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("Malone-Disturbance-Ecology-Lab/CarbonExchangeParameters")
+```
