@@ -68,6 +68,32 @@ TRC_PARMS_05 <- function(data.frame = NULL,
                          PAR.colname = NULL,
                          TA.colname = NULL){
 
+  # Error out if no data frame is provided
+  if (base::is.null(data.frame)) stop("Please provide a data frame")
+
+  # Error out if no number of iterations is provided
+  if (base::is.null(iterations)) stop("Please provide the number of iterations")
+
+  # Error out if no idx column is provided
+  if (base::is.null(idx.colname)) {
+    stop("Please provide the name of the column containing the index")
+  } else (base::message("GREAT JOB! your dataframe contains an index column"))
+
+  # Error out if no NEE column is provided
+  if (base::is.null(NEE.colname)) {
+    stop("Please provide the name of the column containing NEE")
+  } else (base::message("YIPEE! your dataframe contains NEE"))
+
+  # Error out if no TA column is provided
+  if (base::is.null(TA.colname)) {
+    stop("Please provide the name of the column containing TA")
+  } else (base::message("Yay! your dataframe contains TA"))
+
+  # Error out if no PAR column is provided
+  if (base::is.null(PAR.colname)) {
+    stop("Please provide the name of the column containing PAR")
+  } else (base::message("Hooray! your dataframe contains PAR"))
+
   # Squelch visible bindings note
   nee <- idx <- TA <- PAR <- NULL
 
@@ -78,21 +104,6 @@ TRC_PARMS_05 <- function(data.frame = NULL,
 
   df <- data.frame %>% dplyr::select(idx, nee, PAR, TA)
 
-  if(c("idx") %in% base::names(df)) {
-    base::print("GREAT JOB! your dataframe contains idx")
-  } else {base::print("The dataframe must include: idx, nee, TA, and PAR")}
-
-  if(c("nee") %in% base::names(df)) {
-    base::print("YIPEE! your dataframe contains nee")
-  } else {base::print("The dataframe must include: idx, nee, TA, and PAR")}
-
-  if(c("PAR") %in% base::names(df)) {
-    base::print("Hooray! your dataframe contains PAR")
-  } else {base::print("The dataframe must include: idx, nee, TA, and PAR")}
-
-  if(c("TA") %in% base::names(df)) {
-    base::print("Hooray! your dataframe contains TA")
-  } else {base::print("The dataframe must include: idx, nee, TA, and PAR")}
   base::try(equation <- nee ~ a * exp(b*TA), silent = T)
 
   # PARM Dataframe:
