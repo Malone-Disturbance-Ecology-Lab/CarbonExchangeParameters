@@ -34,8 +34,8 @@
 #' ```
 #' @param idx.colname (character) The name of the column containing the index.
 #' @param NEE.colname (character) The name of the column containing NEE.
-#' @param TA.colname (character) The name of the column containing air temperature.
 #' @param PAR.colname (character) The name of the column containing PAR.
+#' @param TA.colname (character) The name of the column containing air temperature.
 #'
 #' @returns (data.frame) Data frame of parameter values by the index used to fit them.
 #' @importFrom magrittr %>%
@@ -65,8 +65,8 @@ TRC_PARMS_04 <- function(data.frame = NULL,
                            brms::prior("normal(0.5, 0.3)", nlpar = "Rref", lb = 0.01, ub = 1),
                          idx.colname = NULL,
                          NEE.colname = NULL,
-                         TA.colname = NULL,
-                         PAR.colname = NULL){
+                         PAR.colname = NULL,
+                         TA.colname = NULL){
 
   # Error out if no data frame is provided
   if (base::is.null(data.frame)) stop("Please provide a data frame")
