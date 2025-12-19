@@ -18,8 +18,8 @@ TRC_PARMS_01(
     brms::prior("normal(1.0, 0.3)", nlpar = "Rref", lb = 0.01, ub = 1),
   idx.colname = NULL,
   NEE.colname = NULL,
-  TA.colname = NULL,
-  PAR.colname = NULL
+  PAR.colname = NULL,
+  TA.colname = NULL
 )
 ```
 
@@ -27,9 +27,9 @@ TRC_PARMS_01(
 
 - data.frame:
 
-  (dataframe) A dataframe that contains net ecosystem exchange (NEE), an
-  index, air temperature (TA), and photosynthetically active radiation
-  (PAR).
+  (data.frame) A data frame that contains net ecosystem exchange (NEE),
+  an index, air temperature (TA), and photosynthetically active
+  radiation (PAR).
 
 - iterations:
 
@@ -38,7 +38,7 @@ TRC_PARMS_01(
 
 - priors.trc:
 
-  (brmsprior dataframe) The priors for
+  (brmsprior data.frame) The priors for
   [`brms::brm()`](https://paulbuerkner.com/brms/reference/brm.html) to
   use. Default priors are as follows:
 
@@ -53,17 +53,18 @@ TRC_PARMS_01(
 
   (character) The name of the column containing NEE.
 
-- TA.colname:
-
-  (character) The name of the column containing air temperature.
-
 - PAR.colname:
 
   (character) The name of the column containing PAR.
 
+- TA.colname:
+
+  (character) The name of the column containing air temperature.
+
 ## Value
 
-(dataframe) Dataframe of parameter values by the index used to fit them.
+(data.frame) Data frame of parameter values by the index used to fit
+them.
 
 ## Details
 

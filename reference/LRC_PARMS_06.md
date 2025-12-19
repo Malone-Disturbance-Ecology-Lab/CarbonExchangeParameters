@@ -32,8 +32,8 @@ LRC_PARMS_06(
 
 - data.frame:
 
-  (dataframe) A dataframe that contains net ecosystem exchange (NEE), an
-  index, and photosynthetically active radiation (PAR).
+  (data.frame) A data frame that contains net ecosystem exchange (NEE),
+  an index, and photosynthetically active radiation (PAR).
 
 - iterations:
 
@@ -42,7 +42,7 @@ LRC_PARMS_06(
 
 - priors.lrc:
 
-  (brmsprior dataframe) The priors for
+  (brmsprior data.frame) The priors for
   [`brms::brm()`](https://paulbuerkner.com/brms/reference/brm.html) to
   use. Default priors are as follows:
 
@@ -64,7 +64,8 @@ LRC_PARMS_06(
 
 ## Value
 
-(dataframe) Dataframe of parameter values by the index used to fit them.
+(data.frame) Data frame of parameter values by the index used to fit
+them.
 
 ## Details
 
