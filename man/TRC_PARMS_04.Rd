@@ -11,16 +11,16 @@ TRC_PARMS_04(
     brms::prior("normal(0.5, 0.3)", nlpar = "Rref", lb = 0.01, ub = 1),
   idx.colname = NULL,
   NEE.colname = NULL,
-  TA.colname = NULL,
-  PAR.colname = NULL
+  PAR.colname = NULL,
+  TA.colname = NULL
 )
 }
 \arguments{
-\item{data.frame}{(dataframe) A dataframe that contains net ecosystem exchange (NEE), an index, air temperature (TA), and photosynthetically active radiation (PAR).}
+\item{data.frame}{(data.frame) A data frame that contains net ecosystem exchange (NEE), an index, air temperature (TA), and photosynthetically active radiation (PAR).}
 
 \item{iterations}{(numeric) The number of iterations to run \code{brms::brm()}.}
 
-\item{priors.trc}{(brmsprior dataframe) The priors for \code{brms::brm()} to use.
+\item{priors.trc}{(brmsprior data.frame) The priors for \code{brms::brm()} to use.
 Default priors are as follows:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{brms::prior("normal(2.0, 0.3)", nlpar = "Q10", lb = 1.0, ub = 3.5) +
@@ -31,12 +31,12 @@ brms::prior("normal(0.5, 0.3)", nlpar = "Rref", lb = 0.01, ub = 1)
 
 \item{NEE.colname}{(character) The name of the column containing NEE.}
 
-\item{TA.colname}{(character) The name of the column containing air temperature.}
-
 \item{PAR.colname}{(character) The name of the column containing PAR.}
+
+\item{TA.colname}{(character) The name of the column containing air temperature.}
 }
 \value{
-(dataframe) Dataframe of parameter values by the index used to fit them.
+(data.frame) Data frame of parameter values by the index used to fit them.
 }
 \description{
 This function uses the equation:

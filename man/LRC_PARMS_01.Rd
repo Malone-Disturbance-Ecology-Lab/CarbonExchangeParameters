@@ -16,11 +16,11 @@ LRC_PARMS_01(
 )
 }
 \arguments{
-\item{data.frame}{(dataframe) A dataframe that contains net ecosystem exchange (NEE), an index, and photosynthetically active radiation (PAR).}
+\item{data.frame}{(data.frame) A data frame that contains net ecosystem exchange (NEE), an index, and photosynthetically active radiation (PAR).}
 
 \item{iterations}{(numeric) The number of iterations to run \code{brms::brm()}.}
 
-\item{priors.lrc}{(brmsprior dataframe) The priors for \code{brms::brm()} to use.
+\item{priors.lrc}{(brmsprior data.frame) The priors for \code{brms::brm()} to use.
 Default priors are as follows:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{brms::prior("normal(-0.01, 0.1)", nlpar = "a1", lb = -0.2, ub = 0) +
@@ -35,7 +35,7 @@ brms::prior("normal(2.10, 0.11)", nlpar = "r", lb = 1.9, ub = 2.2)
 \item{PAR.colname}{(character) The name of the column containing PAR.}
 }
 \value{
-(dataframe) Dataframe of parameter values by the index used to fit them.
+(data.frame) Data frame of parameter values by the index used to fit them.
 }
 \description{
 This function uses the equation:

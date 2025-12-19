@@ -17,11 +17,11 @@ TRC_PARMS_02(
 )
 }
 \arguments{
-\item{data.frame}{(dataframe) A dataframe that contains net ecosystem exchange (NEE), an index, air temperature (TA), and photosynthetically active radiation (PAR).}
+\item{data.frame}{(data.frame) A data frame that contains net ecosystem exchange (NEE), an index, air temperature (TA), and photosynthetically active radiation (PAR).}
 
 \item{iterations}{(numeric) The number of iterations to run \code{brms::brm()}.}
 
-\item{priors.trc}{(brmsprior dataframe) The priors for \code{brms::brm()} to use.
+\item{priors.trc}{(brmsprior data.frame) The priors for \code{brms::brm()} to use.
 Default priors are as follows:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{brms::prior("normal(1, 5)", nlpar = "r0", lb = 0, ub = 5) +
@@ -38,7 +38,7 @@ brms::prior("normal(0, 0.05)", nlpar = "beta", lb = -0.1, ub = 0.1)
 \item{TA.colname}{(character) The name of the column containing air temperature.}
 }
 \value{
-(dataframe) Dataframe of parameter values by the index used to fit them.
+(data.frame) Data frame of parameter values by the index used to fit them.
 }
 \description{
 This function uses the equation:
