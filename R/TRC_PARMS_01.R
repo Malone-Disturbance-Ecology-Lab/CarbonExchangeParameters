@@ -24,9 +24,9 @@
 #' Key points to remember:
 #' Aim for Rhat close to 1 and high values for both Bulk ESS and Tail ESS.
 #'
-#' @param data.frame (dataframe) A dataframe that contains net ecosystem exchange (NEE), an index, air temperature (TA), and photosynthetically active radiation (PAR).
+#' @param data.frame (data.frame) A data frame that contains net ecosystem exchange (NEE), an index, air temperature (TA), and photosynthetically active radiation (PAR).
 #' @param iterations (numeric) The number of iterations to run `brms::brm()`.
-#' @param priors.trc (brmsprior dataframe) The priors for `brms::brm()` to use.
+#' @param priors.trc (brmsprior data.frame) The priors for `brms::brm()` to use.
 #' Default priors are as follows:
 #' ```
 #' brms::prior("normal(0.5, 0.3)", nlpar = "E0", lb = 0.01, ub = 1) +
@@ -37,7 +37,7 @@
 #' @param TA.colname (character) The name of the column containing air temperature.
 #' @param PAR.colname (character) The name of the column containing PAR.
 #'
-#' @returns (dataframe) Dataframe of parameter values by the index used to fit them.
+#' @returns (data.frame) Data frame of parameter values by the index used to fit them.
 #' @importFrom magrittr %>%
 #' @export
 #'
@@ -77,22 +77,22 @@ TRC_PARMS_01 <- function(data.frame = NULL,
   # Error out if no idx column is provided
   if (base::is.null(idx.colname)) {
     stop("Please provide the name of the column containing the index")
-  } else (base::message("GREAT JOB! your dataframe contains an index column"))
+  } else (base::message("GREAT JOB! your data frame contains an index column"))
 
   # Error out if no NEE column is provided
   if (base::is.null(NEE.colname)) {
     stop("Please provide the name of the column containing NEE")
-  } else (base::message("YIPEE! your dataframe contains NEE"))
+  } else (base::message("YIPEE! your data frame contains NEE"))
 
   # Error out if no TA column is provided
   if (base::is.null(TA.colname)) {
     stop("Please provide the name of the column containing TA")
-  } else (base::message("Yay! your dataframe contains TA"))
+  } else (base::message("Yay! your data frame contains TA"))
 
   # Error out if no PAR column is provided
   if (base::is.null(PAR.colname)) {
     stop("Please provide the name of the column containing PAR")
-  } else (base::message("Hooray! your dataframe contains PAR"))
+  } else (base::message("Hooray! your data frame contains PAR"))
 
   # Squelch visible bindings note
   nee <- idx <- TA <- PAR <- NULL
@@ -106,7 +106,7 @@ TRC_PARMS_01 <- function(data.frame = NULL,
 
   base::try(equation <- NEE ~ Rref * exp(E0 * (1 / (10 + 46.02) - 1 / (TA + 46.02))), silent = T)
 
-  # PARM Dataframe:
+  # PARM Data frame:
   base::try(parms <- base::data.frame(idx = base::as.character(),
                                       E0.mean = base::as.numeric(),
                                       E0.se = base::as.numeric(),
@@ -121,7 +121,7 @@ TRC_PARMS_01 <- function(data.frame = NULL,
                                       Rref.Rhat = base::as.numeric(),
                                       samples = base::as.numeric()), silent = T)
 
-  base::message("Your dataframe looks good and you are now ready to start fitting models")
+  base::message("Your data frame looks good and you are now ready to start fitting models")
 
   for (i in base::unique(df$idx)){
     base::print(i)
