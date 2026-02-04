@@ -1,6 +1,6 @@
 #' @title Fit a Light Response Curve (LRC) by an index to get a parameter file
 #'
-#' @description
+#' @description  Author Ammara Talib
 #' This function uses the equation:
 #' \deqn{\text{NEE} \sim a_x \left( 1 - \exp \left( -\frac{a_1 \cdot \text{PAR}}{a_x} \right) \right) - r}
 #'
