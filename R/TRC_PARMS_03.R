@@ -1,6 +1,6 @@
 #' @title Fit a Temperature Response Curve (TRC) by an index to get a parameter file
 #'
-#' @description
+#' @description  Author Ammara Talib
 #' This function uses the equation:
 #' \deqn{\text{NEE} \sim a \left( T - T_{\text{opt}} \right)^2 + E_{\text{Rmax}}}
 #'
