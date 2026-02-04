@@ -23,7 +23,7 @@
 Source:
 [`DESCRIPTION`](https://github.com/Malone-Disturbance-Ecology-Lab/CarbonExchangeParameters/blob/main/DESCRIPTION)
 
-Chen A, Jurado S, Reed D, Talib A, Wang J, Zhang B, Malone S (2025).
+Chen A, Jurado S, Reed D, Talib A, Wang J, Zhang B, Malone S (2026).
 *CarbonExchangeParameters: Carbon Flux Partitioning Methods by the
 Malone Disturbance Ecology Lab*. R package version 0.0.0.9000,
 <https://github.com/Malone-Disturbance-Ecology-Lab/CarbonExchangeParameters>.
@@ -31,7 +31,7 @@ Malone Disturbance Ecology Lab*. R package version 0.0.0.9000,
     @Manual{,
       title = {CarbonExchangeParameters: Carbon Flux Partitioning Methods by the Malone Disturbance Ecology Lab},
       author = {Angel Chen and Sam Jurado and David E Reed and Ammara Talib and Junna Wang and Boya Zhang and Sparkle L Malone},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.0.0.9000},
       url = {https://github.com/Malone-Disturbance-Ecology-Lab/CarbonExchangeParameters},
     }
